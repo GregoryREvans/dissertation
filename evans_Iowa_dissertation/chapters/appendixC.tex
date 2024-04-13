@@ -1,0 +1,152 @@
+\chapter{A Brief History of Abjad and its Æsthetic Relationship to Trevor Bača's Notation}
+\label{AppendixC}
+
+\lettrine[lines=2,slope=-2pt,nindent=2pt]{\textcolor{SchoolColor}{I}}{n my analysis of} the music of Trevor Ba\v{c}a, I have been able to consult his libraries of Python files which represent the complete modeling of a given work. Bača wrote an \ac{API} in Python to assist him when modeling abstract structures in his work. ``The Abjad \ac{API} for Formalized Score Control extends the Python programming language with an open-source, object-oriented model of common-practice music notation that enables composers to build scores through the aggregation of elemental notation objects.''\footnote{\citet[p.1]{abjadpaper}} For a lengthier discussion of the technical aspects of the Abjad system and the notation used to display software in this paper, see Appendix \vref{AppendixB}.
+
+\section{Composition as Software Development}
+
+A principle behind the design of Abjad is \textit{Composition as Software Development}.\footnote{\citet[219]{josiahpaper}} This term describes the kinds of workflows Abjad makes possible. \Ac{CSD} implies that the composer is no longer a simple user of a software, but a software developer in their own right, the methods of conceiving musical actions now inextricably linked with the structural opportunities provided by the power of computing as well as some of the development practices encouraged by the software development community at large.
+
+Each composition develops in the way a programmer writes software. Through the creation of various reservoirs of material,  encapsulated processes are called at specific times throughout the composition process to be assembled into a final score. Composers iterate upon the structures of the music until it is refined into its final expression. The composer relies only on the built-in tools of Abjad for their music, but also writes their own software to produce notation in very personal ways. No particular methodology is enforced by the system. In this way, formal possibilities are limited only by the resourcefulness of the user.
+
+An added benefit of this methodology is that it is common for software developers to house their code in online repositories such as GitHub\footnote{\url{https://github.com/}}. These repositories allow for the perusal not only of others’ source code, but also for the viewing of a history of the changes to each file as a project develops. When a score is designed to operate like a software package, the methodology through which the piece came into being is preserved and inspirations are more easily reused or developed further in new work. Through the practice of software testing, the functionality of older music is retained as the composer refactors and refines their compositional workflow. In this way, all of Bača's works composed with the aid of Abjad have an extensive revision history.
+
+A final aspect of this principle addresses the issue of the user interface. If composing music with Abjad is akin to software design, then the resulting score is the \ac{GUI} of the program. The user interacts with the software through rendering \acp{PDF} of the score. Just as a professional software developer takes care to ensure that the \ac{GUI} of a program is pristine, so does Bača. As Ba\v{c}a composes each section of a composition, the section in question is rendered as a score excerpt color-coded with visually useful information.\footnote{Including but not limited to redundant dynamic marks, out-of-range pitches, etc.} While composing, Bača highlights his materials to produce a fully annotated copy of the score revealing many formal decisions. When it is time to produce a publication-ready document, Bača then removes these annotations. The design of this interface is precisely the design of a \ac{GUI}.
+
+The integration of technology into the compositional process may best be linked to the use of computers by Iannis Xenakis and Brian Ferneyhough. Of course other strains of new music like Spectralism and Minimalism, among others, developed out of pattern anaylsis and reproduction through the use of various technologies, not to mention the expanse of electronic music. These ideas are clearly not æsthetically bound; however, the quasi-scientistic desire for uniformly formalized structures is related to the history of musical Modernism, often linked to Sch\"{o}nberg's description of developing variation and all of the historical baggage therein.
+
+\subsection{Iteration \& Encapsulation}
+
+With Abjad, the composer has the ability to produce large quantities of musical material at once and the ability to easily revise it as the composition develops. With an iterative workflow, any algorithmic processes used in a piece are fine-tuned to the final result. This is as simple as modifying the parameters of an algorithm and re-executing the source file to produce a new realization in notation. With proper encapsulation, continuity throughout a piece is achieved by reuse. Abjad is used for the automation of the translation of algorithmic material patterns into music notation, reducing the effort required to experiment with and modify functions. In his paper \textit{A Computational Model of Music Notation}, Josiah Wolf Oberholtzer describes the process of composing as a composite expression of specification, designing the contents of each moment of a piece, and interpretation, the computational execution of the specification:
+
+\begin{quote}
+\singlespacing
+``But the ability to
+describe and perform precise, mass transformations on musical materials -- even
+if occasionally unintentionally -- is one of, if not \emph{the} driving
+motivation behind Consort.\footnote{Consort is the name of Oberholtzer's personal library of tools which interface with Abjad.} Sections may be stretched, while preserving their
+overall internal phrase structure. The rhythm-makers inscribing a subset of a
+maquette can be swapped for other rhythm-makers, yielding wholly different
+surface textures. Runs of notes and chords occupying weighted pitch centers can
+be selected and octavated en masse. Such transformations are afforded by
+computation. And from a computational perspective, one can consider Consort as
+a system which treats scores as enormous composite expressions, comprising the
+notational sum of the interpretation algorithm applied against each
+specification:''\footnote{\citet[p.245]{josiahpaper}}
+\begin{equation}
+\displaystyle\sum_{i=1}^{n} Interpretation(Specification_i)
+\end{equation}
+\end{quote}
+
+\subsection{Understanding Where Materials Come From}
+
+To programmatically produce the material within a composition, or to selectively produce material by-hand, provides the analyst with a clear answer to the provenance of the material in any part of the score. The composer of the work is also secure in the fact that Ariadne's thread may be traced back through the labyrinth of compositional creativity to relive each action and understand its motivation. In this way, the lessons learned by composing may be remembered and reproduced more easily than when the composer must rely on memory alone. While the reading of the source code of a piece may be difficult for someone unfamiliar with Abjad, with practice, the score repository becomes an immanently readable historical document.
+
+\section{Abjad}
+
+What follows is a brief history of the development of Abjad. One fact which will be not be pursued is that Ba\v{c}a's first experiments in programmatically producing music notation were written in the C programming language. These experiments produced \ac{MIDI} files to be interpreted by any notation software as notation. Apparently this process was not very successful. Particularly, the fidelity of the exported rhythmic values was low.
+
+\subsection{Mathematica}
+
+A better way of identifying the origins of what would eventually become Abjad is Ba\v{c}a's use of Mathematica notebooks. Mathematica, developed by Wolfram Research, is a program which allows for research in machine learning, statistics, symbolic computation, plotting data, and the creation of user interfaces. While Mathematica is commonly used in research contexts, it has a wide user base.
+
+The interface to Mathematica consists of a single file in which the user writes code executable in the Wolfram language. The user defines each element and each step of the program, executing them in sequence, in order to accumulate the final product. Typically Mathematica users intend to export their final data sets to graphs to be included in project reports or papers; however, it is possible to write data to files on the computer's disk. In this way, Ba\v{c}a could write Lilypond files by writing a conversion system between the relevant data and accurate Lilypond syntax. For a fast and iterable workflow, it was necessary to use a dynamically interpreted language, and Python became a solid choice. Python was also chosen for its system of class definitions. This would aid in the modeling of notational objects and statal procedures.
+
+\subsection{Python}
+
+Ba\v{c}a eventually switched from Mathematica to Python because of its reputation in the field of professional software development. Python has a large base of users and many useful community-developed libraries of which advantage can be taken.
+
+\section{Cuepatlahto \& Lascaux}
+
+Trevor Ba\v{c}a and his first collaborator on Abjad, V\'{i}ctor Ad\'{a}n, initially independantly developed two systems for programmatically producing scores engraved by Lilypond files produced by Python code: \textit{Cuepatlahto} by Ad\'{a}n and \textit{Lascaux} by Ba\v{c}a. To quote an excerpt on their paper introducing the systems: ``Cuepatlahto and Lascaux are two systems for the formalization and transcription of musical score.''\footnote{\citet[p.1]{lascaux}} As may be expected, both \acp{API} consist of a set of functions and classes written in Python as wrappers around LilyPond. The authors elaborate on the motivations behind the development of such programs.
+
+\begin{quote}
+\singlespacing
+``Cuepatlahto and Lascaux address several problems in music composition with which we have each been confronted including the difficulty involved in transcribing larger scale and highly parameterized gestures and textures into traditional western notation, the general inflexibility of commercial music notation software packages, the relative inability of objects on the printed page in conventional score to point to each other -- or, indeed, to other objects or ideas outside the printed page -- in ways rich enough to help capture, model and develop long-range, nonlocal relationships throughout our scores.''\footnote{\citet[p.1]{lascaux}}
+\end{quote}
+
+To consider some of the contrasts between the two composing environments, consider the following quotes. Cuepatlahto is described as
+
+\begin{quote}
+\singlespacing
+``[...] admit[ing] numeric input both by hand and from file as well as from the output of a digitizing tablet after the fashion of the UPIC machine of Xenakis; this specialized graphic input integrates Cuepatlahto tightly with the first author’s work in geometric input and transforms as a driver of the compositional process. To translate graphic and geometric elements outside the score to concrete elements of notation within the score, Cuepatlahto implements strong support for the quantization of floating point or real numbers and the transformation of those values through the matrix operations of linear algebra.''\footnote{\citet[p.12]{lascaux}}
+\end{quote}
+
+However Lascaux is described as
+
+\begin{quote}
+\singlespacing
+``[...] rul[ing] out quantization and realvalued modeling in favor of discrete and combinatorial transforms over the integers. This way of working follows the second author’s rejection of overt mapping of visual or geometric information from the external world into the score in favor of the iterative and layered construction of complexes of information designed to rival our experience of the visual world.''\footnote{\citet[p.12]{lascaux}}
+\end{quote}
+
+This implies a preference on Ba\v{c}a's part for discrete mathematics over continuous math, a principle which would carry through to Abjad. The paper ends with a portent of the software to come. ``We leave open the possible unification of both systems and also the eventual publication of one or both systems on the public Internet.''\footnote{\citet[p.12]{lascaux}}
+
+\subsection{Abjad}
+
+Ba\v{c}a and Ad\'{a}n did eventually combine their efforts into a new \ac{API}. While it is not clear how either project may have developed in parallel, Abjad certainly developed more rapidly and effectively under the supervision of two developers rather than as the passion project of a single author. While attending Harvard University, Ba\v{c}a collaborated on Abjad with Josiah Wolf Oberholtzer, leading to an architecture underlying much of Abjad's current design.
+
+\subsubsection{Formalized Score Control}
+
+The notion of \ac{FSC} is based upon the idea that the act of composing for acoustic instruments requires a relay of some form of instruction from the composer to the interpreter.
+
+\begin{quote}
+\singlespacing
+``In picking the phrase formalized score control to capture our solutions to these problems, we hope to highlight our want to embody important elements of musical score symbolically such that the full power of modern programming languages and tools in mathematics can be brought to bear on all parts of the compositional process.''\footnote{\citet{abjadwebsite}}
+\end{quote}
+
+There is a choice to be made in designing a program which is meant to be used as an \ac{ANG}. Should the system be designed to be format-specific, to only output in the syntax of one notation software like Lilypond, or should the system be designed to be format-neutral, to output in a way that multiple notation engines may parse? There are benefits to either method. There is the possibility of a wider set of potential applications to the software system which is format-neutral, however the format-specific system allows for a greater degree of notational control. In an email listserv for users of the computer-assisted composition software \textit{Strasheela}, Ba\v{c}a wrote to the program's author Torsten Anders:
+
+\begin{quote}
+\singlespacing
+``[...] Early versions of Lascaux (one of the two predecessor projects to Abjad) output \ac{MIDI} and Csound scores before Lilypond output, but work on my actual pieces for the following couple of years minimized my need for those two formats and maximized my need to notation visualization (first in the form of SCORE .pmx files and later as Lilypond scores). So I guess Abjad represents an organic move away from multiple-format output towards Lilypond only for practical reasons.''\footnote{\citet{strasheela}}
+\end{quote}
+
+In most forms of Western classical music, the medium of transference is that of music notation in the traditional style. With \ac{FSC}, the act of composition is concerned with the manipulation of notational graphemes on a page of a score which represent an action to be achieved by the performer, not an abstract description of what sounds may result. This stands in contrast to the process of composing certain kinds of electronic music where durations are counted in seconds, pitch is understood as the frequency of wavelenghts, and timbre can be either the waveform or a modulation of a sound.
+
+\ac{FSC} understands instrumental composition as the assembling of symbols which represent these phenomena, not the phenomena themselves. In using a program designed with \ac{FSC} in mind, the user creates a score by initializing discrete objects representing the contents of musical score. The parameters of these discrete objects are then modified to represent different values such as pitch, duration, or the attachment of articulations or text. These graphic elements are often traditional notational figures such as note heads, beams, slurs, and more, but can also be articulations, text, lines, and other shapes. In this case, the score is a deliberate set of instructions intended to affect the mode of performance, thus the clarity, precision, and purity of this document is held as a significant priority. For instance, the difference between the notation of the passage in \autoref{fig:tuplet} and the passage in \autoref{fig:notuplets} is in no way trivial.
+
+\begin{figure}[H]
+    \includegraphics{lilypond/example_1/example.pdf}
+    \caption{Notation example 1}
+    \label{fig:tuplet}
+\end{figure}
+
+\begin{figure}[H]
+    \includegraphics{lilypond/example_2/example.pdf}
+    \caption{Notation example 2}
+    \label{fig:notuplets}
+\end{figure}
+
+Although the two passages are created with identical musical content, a Lilypond stylesheet changes the graphic result, removing beams, dots, rests, stems, and tuplet brackets. This kind of graphic manipulation, as well as that of textual instructions, is not modeled in formats like \ac{MIDI} and would be especially difficult to model in a format-neutral system. A program designed with \ac{FSC} in mind intentionally provides an interface which considers graphic manipulations of non-sonic parameters as compositionally salient.
+
+Abjad does not restrict the end result of a composer’s score, but the choice of how the music is represented is an important one. It is fundamental to Abjad that the user may systematically choose when and how notation changes throughout the course of a score to better represent the desired influence of the visual document upon the interpreter. This results in the deeply personal nature of a composer’s chosen notation.
+
+With the Abjad design principle of \ac{FSC}, any and all graphic elements that appear on the page of a score may be treated as manipulable compositional entities. This means that transformational and developmental processes within a given piece might only occur in a parameter of performance mode; rather, than in more traditional musical materials such as pitch and rhythm. In this way, the composition is not just of parameters of sound, rather it may also be composition with parameters of performance practices. Sound is no longer the only model for music; bodily action may take its place, a reality afforded by Abjad's format-specific design.
+
+\subsection{Notation}
+
+Some features of Ba\v{c}a's notational style require explanation. The notation of the early pieces typically consists of exploded parametric streams used to describe the simultaneous development of continuous transformations. Occasionally the layout of the document is also idiosyncratic. There is something unique in Ba\v{c}a's approach to the notation of parametric streams. Some composers interested in parametricism simply represent it graphically with lines of changing size or color. Ba\v{c}a is among the composers who attempt to specify the meaning of parametric transitions in greater specificity by specifically measuring the parameters with an underlying staff and by timing these events with traditional rhythmic practices.
+
+\begin{figure}[H]
+\resizebox{\columnwidth}{!}{
+    \includegraphics[scale=0.55]{lilypond/sekka_mm40-42.pdf}
+    }
+    \caption{Sekka (2007): measures 40-42}
+    \label{fig:sekka_mm40-42}
+\end{figure}
+
+\section{Pre-cartesian Notation}
+
+When notating parametric strata in score, it becomes useful to notate the transition from one effect to another. When elements are graphed over time in any non-musical context, it is necessary that elements of the time domain be spaced proportionally with one another to give the reader an accurate depiction of scale. However traditional engraving practices for music notation exhibit a preference for saving space on the printed page rather than temporal accuracy. Many modern composers, Ba\v{c}a included, have developed a notational preference for proportionally spaced note heads in opposition to classic notation.
+
+The Medi{\ae}val origins of Western music notation is also strictly pre-cartesian, meaning the durations of sonic elements are ended by the occurence of the succeeding note.\footnote{Despite having unique note head symbols, stems, flags, and beams for differing durations.} There is no symbolic representation of the stop-offset. If a transitioning parameter is to be completed by the end of a duration, it must be notated on the following note head, however this is contradictory. An alternative is to attach the conclusion of the transitioning material to an after-grace note or to compose following durations intended to provide this notational support.
+
+\begin{figure}[H]
+\resizebox{\columnwidth}{!}{
+    \includegraphics[scale=0.72]{lilypond/still_mm1-8.pdf}
+    }
+    \caption{Stirrings Still (2018): measures 1-8}
+    \label{fig:still_mm1-8}
+\end{figure}
+
+These are problems which Ba\v{c}a has attempted to solve in his notational practice. Sometimes new notation is invented to more accurately depict musical events. At other times, traditional notation is used because of its commonality and legibility to classically trained musicians. All of these concerns are treated within Abjad.

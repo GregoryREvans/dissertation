@@ -1,0 +1,295 @@
+\begin{savequote}[75mm]
+Unity is surely the indispensable thing if meaning is to exist. Unity, to be very general, is the establishment of the utmost relatedness between all component parts. So in music, as in all other human utterance, the aim is to make as clear as possible the relationships between the parts of the unity; in short, to show how one thing leads to another.
+\qauthor{Anton Webern\footnote{\citet[42]{webern-quote}}}
+\end{savequote}
+
+\chapter{\textit{Rhea} (1988) by Francisco Guerrero}
+\label{Chapter1}
+% \lettrine[lines=2,slope=-2pt,nindent=2pt]{\textcolor{SchoolColor}{T}}{he music of Francisco Guerrero Marín}
+
+\lettrine[lines=3]{\setmainfont{GoudyInitialen}[Path=./fonts/, Extension = .ttf]\color{printGreen}T}{he music of Francisco Guerrero Marín} (1951-1997) captured my imagination from the moment I heard it. This music has a harsh fauvist æsthetic,\footnote{\citet[69]{guerreropaper}} uses recurrence in its formal techniques, and exhibits high levels of textural contrast. I was first exposed to this composer through a passing mention of him as the teacher of Alberto Posadas, instructing the latter composer in his formalist techniques, in a book by José Luis Besada.\footnote{\citet[58]{besada}} I observed Guerrero's preference for rigorous formalization due to the invariant quality of his musical materials. It seemed clear to me that some generative element was involved in the production of local musical materials and that the stability of these textures provided a consistent palette through which large-scale formal transformations could be displayed. Because of this potential for clarity of form and my self-assessed ignorance of formal techniques, I decided that Guerrero's music would be a good place for me to begin my research. Studying Guerrero's music has proven difficult, due to the significant lack of writing on his work and especially so in English. While nearly every article on Guerrero mentions his use of graphic scores and chance operations in his early music, combinatorial techniques in his middle period from 1975,\footnote{\citet[77]{guerreropaper}}, topological models from 1988,\footnote{\citet[77]{guerreropaper}} and fractal modeling in his late works from 1990,\footnote{\citet[77]{guerreropaper}} the only resource which I have found which is able to detail these techniques with any specificty is \textit{La Música de Francisco Guerrero Marín (1951-1997): La Combinatoria como Sistema Compositivo} by Miguel Morate Benito, which also proved difficult to find and translate. Morate's dissertation is primarily focused on the middle, combinatorial period of Guerrero's work and while my analysis of the work \textit{Rhea} was begun with a hint from Morate regarding the divisions of materials, to my knowledge, no other analysis of the work exists.
+
+\section{Summary of Known Techniques}
+
+\subsection{Definition of Basic Materials}
+
+To begin, I studied some of Guerrero's known techniques as described by Morate. The music of Guerrero's middle, combinatorial period can be easier to analyze due to the incorporation of random operations in the later music disguising sets of permutations.\footnote{\citet[293]{guerreropaper}} For instance, in \textit{Zayin (1983)} for string trio, Guerrero ``develops all possible combinations of instruments, attacks, dynamics, durations, rhythmic templates, materials, etc., and assigns a numerical value to each of the terms of the combinations from a series that is created based on a ratio factor.''\footnote{\citet[43]{guerreropaper}} Typically, Guerrero divides muscal materials into three broad categories of ``held sounds,'' ``repeated notes,'' and ``counterpoints/uneven sounds.''\footnote{\citet[150]{guerreropaper}} The held notes may be a sustained pitch, a glissando, or either of these forms combined with tremolo, the repeated notes tend to have an irregular rhythm, and the counterpoints consist of rapid oscillating movements in a constrained register.\footnote{\citet[150]{guerreropaper}}
+
+\subsection{Formal Organization}
+
+After defining the materials, the form is derived first by calculating the possible unordered combinations of materials from size 1 through the full set. For instance, a group of materials \textit{ABC} can be arranged into combinations in figure \ref{fig:ABC-combinations}.\footnote{\citet[150-151]{guerreropaper}} There are seven total combinations which can be formed out of a set of three elements. Guerrero became particularly interested in the relationship between the numbers 7 and 3. His Zayin cycle, whose title is the seventh letter of the Hebrew alphabet,\footnote{Zayin is used to \emph{represent} the number seven in the Gematria.} was intended to be a seven-piece cycle for string trio composed out of manupulations of these seven combinations. However the plan of the cycle eventually changed to incorporate other techniques. This chapter later describes his 7-term system which also features a special relationship between the numbers 7 and 3.
+
+\begin{figure}[H]
+    \centering
+    \{A, B, C, AB, AC, BC, ABC\}
+    \caption{All unordered combinations of set ABC}
+    \label{fig:ABC-combinations}
+\end{figure}
+
+It is not necessarily the case that a work will be composed of all available combinations. It is possible that Guerrero would choose only certain combinations which he found interesting, for instance the combinations found in figure \ref{fig:ABC-select-combinations}.
+
+\begin{figure}[H]
+    \centering
+    \{A, C, BC, ABC\}
+    \caption{Select combinations of set ABC}
+    \label{fig:ABC-select-combinations}
+\end{figure}
+
+The selected combinations are then able to be rearranged into an order the composer finds suitable, see figure \ref{fig:ABC-reordered-combinations}.
+
+\begin{figure}[H]
+    \centering
+    \{BC, A, C, ABC\}
+    \caption{Reordered combinations of set ABC}
+    \label{fig:ABC-reordered-combinations}
+\end{figure}
+
+Now it is possible to determine the total length of the work and to partition the length of the total work into each chosen subsection through the following proportion:\footnote{\citet[150-151]{guerreropaper}}
+\begin{equation}
+    D_s = \frac{(F_p \cdot D_t)}{\Sigma F_p}
+    \label{eq:guerrero-proportions}
+\end{equation}
+
+Where $D_s$ is the duration of each subsection, $F_p$ is a the proportional factor of the total duration consumed by the relevant subsection, and $D_t$ is the total duration. Morate finds the following proportions in \textit{Zayin} for string trio.
+
+\begin{figure}[H]
+    \centering
+    1.8 + 2.4 + 3.3 + 3.6 + 5.4 = 16.5
+    \caption{Proportions of subsections in Zayin for string trio}
+    \label{fig:zayin proportions}
+\end{figure}
+
+So to perform the duration calculation on these proportions we obtain the following durations with a desired total duration of 240''.
+
+\begin{equation}
+    D_1 = \frac{(1.8 \cdot 240)}{16.5} = 26.18''
+\end{equation}
+
+\begin{equation}
+    D_2 = \frac{(2.4 \cdot 240)}{16.5} = 34.9''
+\end{equation}
+
+\begin{equation}
+    D_3 = \frac{(3.3 \cdot 240)}{16.5} = 48''
+\end{equation}
+
+\begin{equation}
+    D_4 = \frac{(3.6 \cdot 240)}{16.5} = 52.36''
+\end{equation}
+
+\begin{equation}
+    D_5 = \frac{(5.4 \cdot 240)}{16.5} = 78.54''
+\end{equation}
+
+After calculating the section lengths, these durations could be assigned to each material successively or rearranged into a non-increasing order. After formulating the general formal plan, Guerrero would then work on the localized musical entities in order to govern each of the sections, sometimes applying the same combinatorial model used in the global structure. In this way Guerrero was already exhibiting an interest in self-similarity, ultimately resulting in his later fractal-inspired music\footnote{\citet[150-151]{guerreropaper}}
+
+\subsection{Topology and the Seven-Term System}
+
+In later works, such as \textit{Rhea}, some aspects of the piece's form were inspired by the enumeration and selection of combinations through a material distribution based on the arrangements of a Steiner system. A Steiner system is a particular kind of combinatorial design. A Steiner system with parameters $t$, $k$, $n$, written $S(t,k,n)$, is a set $S$ of $n$ elements with a subsets of $k$ elements of $S$ with the additional constraint that each subset of $t$ elements of $S$ is contained in exactly one block.\footnote{\citet{steinerbook}} Guerrero published his first description of this system in 1990 in \textit{Scherzo Magazine}.\footnote{\citet{guerrerotopology}} I have included a translation of this article in Appendix \vref{AppendixA}.\footnote{While researching the music of Francisco Guerrero, I prepared rough translations of several articles and interviews with the composer. I only include a translation of the \textit{Scherzo} article in this dissertation as an attestation to the ambiguity with which the topological concept is baptized.}
+
+Guerrero, in particular, was interested in the Steiner triple system known as the Fano plane notated as $S(2,3,7)$. Meaning, from a total set of 7 elements, 7 subset triples are constructed so that a unique pair of elements appears only once. A graph of this system can be seen in figure \ref{fig:fano-plane}. Guerrero's solution also happens to feature two more constraints: each element appears three times in each position within the ordered triple and each triple has 1 element in common with any other triple. So for $S=(A, B, C, D, E, F, G)$ Guerrero derives the triples \{ABC, BDE, DCF, CEG, EFA, FGB, GAD\}.\footnote{\citet{guerrerotopology}} \marginpar{Notice that Guerrero's ordering of each triple does not easily map on to the orders which would appear present in the graph. This is so that each subsequent triple begins on the item in position two of the previous triple.}
+
+\begin{figure}[H]
+    \centering
+    \FanoPlane[3cm]
+    \caption{Graph of the Fano Plane}
+    \label{fig:fano-plane}
+\end{figure}
+
+Guerrero was also inspired by a particular conception of topological invariance,\footnote{\citet[85]{besada}} also described in the \textit{Scherzo} article. However, without displaying any concrete examples of the working process, it is only possible to fully understand this system with a study of Guerrero's sketch material. The article implies a new system for deriving the length of each subsection, including some random variation and a way to independently derive the length of phrases in each voice of a work. It is possible to surmise, through a study of \textit{Rhea}, that part of this topological invariance is also the selection of adjacent material subgroups only if each subgroup contains at least one common element, that is, an invariant factor. Regardless of a certain lack of specificity in the article, it is clear that Guerrero was searching for a generalized approach to the formalization of large-scale form within his works.
+
+\subsection{Underlying, Surface, and Resultant Rhythms}
+
+From the late 1970's, Francisco Guerrero's rhythmic approach falls into three categories: the two parameters of ``surface rhythms''\footnote{Spanish: Rítmica Yacente} and ``underlying rhythms''\footnote{Spanish: Rítmica Subyacente} together produce ``resultant rhythms.''\footnote{Spanish: Rítmica Resultante} The system begins by the creation of a ``rhythmic grid'' layer referred to as the underlying rhythms.\footnote{{\citet[153]{guerreropaper}}} Depending on the meter (typically \lilyTimeSignature{4}{4}) each measure is divided into its primary beats. Each beat is then subdivided into a different number of attacks such as 5, 6, 7, 8, resulting in quintuplets, sextuplets, septuplets, and 32\textsuperscript{nd} notes respectively:
+
+\begin{figure}[H]
+    \includegraphics{lilypond/underlying_rhythm.pdf}
+    \caption{Underlying Rhythms}
+    \label{fig:underlying}
+\end{figure}
+
+Guerrero particularly sought to avoid coincident attacks when possible. This is particularly apparent in works for small ensembles, however large ensemble works make it impossible to truly avoid coincident attacks. Nevertheless, a general disorder of attack points is still the desired effect. To achieve this, Guerrero would produce a series of subdivisions for a voice and would perform operations to rearrange the subdivisions, such as permutations or rotations. Morate gives the example of an underlying rhythmic arrangement matrix in the context of a string quartet in figure \ref{fig:underlyin-permutations}.
+
+\begin{table}[H]
+    \centering
+    \begin{tabular}{ c | c c c c } 
+vn1 & 5 & 6 & 7 & 8\\
+vn2 & 6 & 7 & 8 & 5\\
+va & 7 & 8 & 5 & 6\\
+vc & 8 & 5 & 6 & 7
+\end{tabular}
+    \caption{Subdivision permutations avoiding coincident prolations}
+    \label{fig:underlyin-permutations}
+\end{table}
+
+After producing this grid, which could potentially be several measures long, the sequence of subdivisions would be repetitively applied throughout the whole composition, sometimes with slight variation. Without access to compositional sketches it is unknowable when variation on the underlying grid is a compositional choice or an error in calculation.
+
+The ``surface'' rhythms are the number of subdivisions\footnote{Produced by the underlying rhythm process.} gathered into one pitch repeated for every selected subdivision.\footnote{\citet[155]{guerreropaper}} These surface rhythms, like the underlying rhythms, are also derived from repeated permutations of a numeric sequence; however, Morate notes that later works rely on random procedures to produce the surface rhythms:\footnote{\citet[216]{guerreropaper}}
+
+\begin{figure}[H]
+    \includegraphics{lilypond/surface_rhythms.pdf}
+    \caption{Surface Rhythms}
+    \label{fig:surface}
+\end{figure}
+
+The ``resulting rhythm,'' then, is one pitch event held as a note of the total duration of the gathered subdivisions.\footnote{\citet[156]{guerreropaper}} This system provides Guerrero with a method of producing irregular rhythms in varied prolations based on numeric sequences, subject to patterned organization, while refraining from writing heavily pulse-oriented or metric music:
+
+\begin{figure}[H]
+    \includegraphics{lilypond/resultant_rhythm.pdf}
+    \caption{Resulting Rhythms}
+    \label{fig:resulting}
+\end{figure}
+
+To visualize permutations of underlying, surface, and resulting rhythms in an ensemble context, see figures \ref{fig:surface-quartet} and \ref{fig:resulting-quartet}. Let us take the underlying rhythms found in table \ref{fig:underlyin-permutations}, where each voice is given a different rotation of the sequence [5, 6, 7, 8]. Each voice is then given a rotation of the surface rhythm sequence [4, 5, 2, 3, 6, 4]:
+
+\begin{figure}[H]
+    \includegraphics[scale=0.8]{lilypond/quartet_surface.pdf}
+    \caption{Surface Rhythms across a quartet}
+    \label{fig:surface-quartet}
+\end{figure}
+
+By fusing these rhythms into single durations rather than re-articulations, we get the resulting rhythms, showing a general disorder with only a few coincident attacks:
+
+\begin{figure}[H]
+    \includegraphics[scale=0.8]{lilypond/quartet_resulting.pdf}
+    \caption{Resulting Rhythms across a quartet}
+    \label{fig:resulting-quartet}
+\end{figure}
+
+\section{Basic Materials in \textit{Rhea}}
+
+Because \textit{Rhea} for 12 saxophones is the first of Guerrero's works to use the 7-term system, rather than three generalized materials, the work uses seven types of behaviors that we can denote with the following letters:
+\begin{enumerate}[label=\Alph*]
+\item Slow glissandi ascending and descending
+\item Multiphonics
+\item Singing into the instrument simultaneously with sounds played by the instrument
+\item Long held notes
+\item Repeated notes
+\item Rapid glissandi ascending and descending
+\item Trills\footnote{\citet[285]{guerreropaper}}
+\end{enumerate}
+It should be noted that while each of these materials has a relatively clear identity, some of the materials are able to be used as ``fusion'' sounds with one another. For instance, it is possible to sing into the instrument (material \boxed{\text{C}}) while performing any of the other actions. Also, the quality of certain techniques could be difficult to aurally distinguish from one another (i.e. long held notes vs. multiphonics, or slow vs. fast glissandi).
+
+\section{Rhythmic Processes in \textit{Rhea}}
+
+It can be difficult to reverse-engineer Guerrero's rhythm-generation process. In situations where a note is held longer than a quarter note, the ``underlying rhythm'' grid will not be visible within the score, nor will the grid be visible over rests. Occasionally, the final notation of the published score is simplified, for instance a note change directly in the center of a sextuplet will be written as eighth notes. At the beginning of the piece there are hints at a foundational pattern but there is enough inconsistency to imply some random perturbation of a preexisting sequence. It can be useful to look at rhythmic-repetition passages to find the underlying rhythms because the surface rhythms\footnote{Or more specifically, the lack of resultant rhythms.} do not interfere with the reading of the tuplet brackets. By analyzing measures 40-52, which feature some of the most continuous activity of the repetition material, it is possible to detect a staggered pattern of subdivisions: see figure \ref{fig:rhea-prolations-40-52}.
+
+\begin{table}[H]
+    \centering
+    \resizebox{\columnwidth}{!}{
+\begin{tabular}{ c | c c c c c c c c c c c c c }
+& m. 40 & m. 41 & m. 42 & m. 43 & m. 44 & m. 45 & m. 46 & m. 47 & m. 48 & m. 49 & m. 50 & m. 51 & m. 52 \\
+ \hline
+spn. & \colorbox{green}{\_756} & \colorbox{yellow}{7\_56} & \colorbox{red}{5767} & \colorbox{cyan}{\_\_\_8} & \colorbox{green}{5785} & \colorbox{yellow}{\_\_\_5} & \colorbox{orange}{\_\_\_\_} & \colorbox{cyan}{568\_} & \colorbox{teal}{6658} & \colorbox{yellow}{7855} & \colorbox{red}{7567} & \colorbox{cyan}{8567} & \colorbox{green}{\_\_\_\_} \\
+spr. & \colorbox{yellow}{6767} & \colorbox{red}{5\_67} & \colorbox{cyan}{8678} & \colorbox{green}{87\_5} & \colorbox{yellow}{6768} & \colorbox{orange}{\_\_\_6} & \colorbox{cyan}{6\_\_\_} & \colorbox{teal}{66\_\_} & \colorbox{yellow}{7856} & \colorbox{red}{7567} & \colorbox{cyan}{8678} & \colorbox{green}{5675} & \colorbox{yellow}{\_\_\_\_} \\
+spr. & \colorbox{red}{7\_\_5} & \colorbox{cyan}{6\_78} & \colorbox{green}{5785} & \colorbox{yellow}{67\_5} & \colorbox{orange}{8876} & \colorbox{cyan}{\_\_\_7} & \colorbox{teal}{\_\_\_\_} & \colorbox{yellow}{785\_} & \colorbox{red}{7567} & \colorbox{cyan}{8678} & \colorbox{green}{5785} & \colorbox{yellow}{67\_\_} & \colorbox{red}{\_7\_5} \\
+alt. & \colorbox{cyan}{\_576} & \colorbox{green}{5\_85} & \colorbox{yellow}{68\_\_} & \colorbox{orange}{88\_6} & \colorbox{cyan}{5587} & \colorbox{teal}{6658} & \colorbox{yellow}{7\_\_6} & \colorbox{red}{758\_} & \colorbox{cyan}{7678} & \colorbox{green}{5785} & \colorbox{yellow}{6856} & \colorbox{red}{7\_\_\_} & \colorbox{cyan}{\_\_5\_} \\
+alt. & \colorbox{green}{\_6\_7} & \colorbox{yellow}{\_\_65} & \colorbox{orange}{88\_\_} & \colorbox{cyan}{55\_7} & \colorbox{teal}{6658} & \colorbox{yellow}{7856} & \colorbox{red}{7\_67} & \colorbox{cyan}{86\_\_} & \colorbox{green}{5785} & \colorbox{yellow}{6856} & \colorbox{red}{756\_} & \colorbox{cyan}{\_\_\_\_} & \colorbox{green}{\_\_\_\_} \\
+alt. & \colorbox{yellow}{67\_5} & \colorbox{orange}{\_\_76} & \colorbox{cyan}{58\_\_} & \colorbox{teal}{66\_8} & \colorbox{yellow}{7856} & \colorbox{red}{7567} & \colorbox{cyan}{\_\_78} & \colorbox{green}{58\_\_} & \colorbox{yellow}{6856} & \colorbox{red}{7567} & \colorbox{cyan}{85\_\_} & \colorbox{green}{\_\_\_\_} & \colorbox{yellow}{\_\_6\_} \\
+ten. & \colorbox{red}{7\_56} & \colorbox{cyan}{7\_87} & \colorbox{teal}{6858} & \colorbox{yellow}{7\_\_6} & \colorbox{red}{7567} & \colorbox{cyan}{8678} & \colorbox{green}{5785} & \colorbox{yellow}{6856} & \colorbox{red}{7\_\_\_} & \colorbox{cyan}{\_678} & \colorbox{green}{5\_\_\_} & \colorbox{yellow}{\_\_\_\_} & \colorbox{orange}{\_\_\_\_} \\
+ten. & \colorbox{cyan}{8567} & \colorbox{teal}{\_\_58} & \colorbox{yellow}{78\_6} & \colorbox{red}{75\_7} & \colorbox{cyan}{8678} & \colorbox{green}{5785} & \colorbox{yellow}{\_\_56} & \colorbox{red}{7567} & \colorbox{cyan}{8\_\_\_} & \colorbox{green}{\_785} & \colorbox{yellow}{67\_\_} & \colorbox{orange}{\_\_\_\_} & \colorbox{cyan}{\_\_\_\_} \\
+ten. & \colorbox{green}{\_\_75} & \colorbox{yellow}{6\_56} & \colorbox{red}{7867} & \colorbox{cyan}{8\_\_8} & \colorbox{green}{5785} & \colorbox{yellow}{6856} & \colorbox{red}{7567} & \colorbox{cyan}{8678} & \colorbox{green}{5\_\_\_} & \colorbox{yellow}{\_765} & \colorbox{orange}{8876} & \colorbox{cyan}{\_\_\_\_} & \colorbox{teal}{\_\_\_\_} \\
+bar. & \colorbox{yellow}{5876} & \colorbox{red}{\_\_\_\_} & \colorbox{cyan}{\_678} & \colorbox{green}{57\_5} & \colorbox{yellow}{6856} & \colorbox{red}{\_567} & \colorbox{cyan}{\_678} & \colorbox{green}{5785} & \colorbox{yellow}{678\_} & \colorbox{orange}{\_776} & \colorbox{cyan}{5587} & \colorbox{teal}{67\_\_} & \colorbox{yellow}{\_\_\_\_} \\
+bar. & \colorbox{red}{6557} & \colorbox{cyan}{6\_\_\_} & \colorbox{green}{\_785} & \colorbox{yellow}{68\_6} & \colorbox{red}{7567} & \colorbox{cyan}{\_678} & \colorbox{green}{5785} & \colorbox{yellow}{6765} & \colorbox{orange}{887\_} & \colorbox{cyan}{\_587} & \colorbox{teal}{6658} & \colorbox{yellow}{757\_} & \colorbox{red}{\_5\_7} \\
+baj. & \colorbox{cyan}{\_\_\_\_} & \colorbox{green}{\_\_\_\_} & \colorbox{yellow}{\_856} & \colorbox{red}{75\_7} & \colorbox{cyan}{8678} & \colorbox{green}{\_785} & \colorbox{yellow}{\_765} & \colorbox{orange}{8876} & \colorbox{cyan}{557\_} & \colorbox{teal}{\_658} & \colorbox{yellow}{7856} & \colorbox{red}{7657} & \colorbox{cyan}{\_\_\_7} \\
+\end{tabular}
+}
+\caption{Analysis of prolations in \textit{Rhea} mm 40-52}
+    \label{fig:rhea-prolations-40-52}
+\end{table}
+
+In this diagram, measures which feature the same prolation pattern, or a very similar variation, are color-coded with the same color. In the case of beats whose subdivision is either impossible to discern or too ambiguous to be confidently declared, an underscore is given instead of the number of subdivisions. Some measures slightly permute the order of subdivisions or modify single values, but it appears that subdivisions in groups of four are kept relatively stable. I chose 13 measures in order to see if a total repetition of the cycle would occur after all twelve instruments finished the pattern. It appears that a repetition of the cycle would begin. When observing the opening of the piece, some of these groups of four are present, but the pattern, even if difficult to detect, seems to be different than the one presented in the above graph. It is possible that different sections of the piece feature different subdivisional patterns or that each tetrad within the sequence is gradually manipulated over the course of the piece, constantly renewing the progression of subdivisions.
+
+The surface rhythms found in the repetition gestures crossing the boundary from  measures 41-42 reveal no patterned sequence: see table \ref{fig:rhea-surface}.
+
+\begin{table}[H]
+    \centering
+352325435
+
+254453584
+
+42813242931
+
+65252
+
+25427
+
+41533
+
+73125
+
+67322
+
+15244
+
+332414
+    \caption{Surface rhythms from repetitions crossing the boundary of measures 41-42}
+    \label{fig:rhea-surface}
+\end{table}
+
+Perhaps the sequence is too long to be revealed in this amount of time and perhaps different materials have different degrees of orderliness in their surface rhythmic application. Despite the lack of an ultimate conclusion as to the organization of the total rhythmic surface of \textit{Rhea}, I was discouraged from pursuing the time-consuming process of counting all discernible surface rhythms and tallying all observable prolations in the 90-measure work. Guerrero uses a single framework for rhythm generation which can be slightly modified for different materials or sections, perhaps preferring smaller counts for surface rhythms of one material and larger counts for another, however this means that rhythm generation is rarely a salient enough category to be used as the defining feature of a material. While these facets of Guerrero's work are fascinating and certainly influenced aspects of my own practice, the purpose of analyzing \textit{Rhea} was to get an understanding of his approach to the distribution of well-defined material categories. While there remains a possibility that certain underlying and surface rhythmic patterns could be coupled to the statement of specific materials, my aural impression of the work remains in the universe of Guerrero's original three material categories of sustained tones, repetitions, and counterpoints. The pitch content of the work sounds mostly directed by register rather than by a foundational chord or by serial technique. Since the above definitions of the seven materials do not include descriptions of pitch or dynamics, I decided not to attempt a reverse-engineering of these materials either.
+
+\section{Analysis of Form}
+
+Morate gives a sequence of material labels in his dissertation and even allocates them to specific sections, six in all; however, I analyzed the work without this sequence, because I perceived the work as ultimately having a slightly simpler shape. It is likely Morate's sequence is lifted from Guerrero's sketches of the work, but we will return to their implications later. To analyze the form of \textit{Rhea}, I annotated a copy of the score by highlighting phrases color-coded to each material. I labeled material \boxed{\text{A}} with indigo, \boxed{\text{B}} with yellow, \boxed{\text{C}} with green, \boxed{\text{D}} with red, \boxed{\text{E}} with light blue, \boxed{\text{F}} with orange, and \boxed{\text{G}} with grey. After annotating the score, I reproduced the color-map onto graph paper; see figure \ref{fig:Rhea-graph}.
+
+\begin{figure}[p]
+\centering
+    \rotatebox{90}{
+    \resizebox{0.9\textheight}{!}{
+    \includegraphics{lilypond/Rhea_graph.pdf}
+    }
+    }
+    \caption{Color-coded graph of the large-scale form of \textit{Rhea}}
+    \label{fig:Rhea-graph}
+\end{figure}
+
+I divided the graph on to two systems to illustrate the main feature of the form which I detect. I read the work as having a two-part structure where a sequence of the same transition techniques is applied to a different sequence of materials. The first formal move is a unified statement of a material across the entire ensemble, gradually deteriorating from the inner voices while the outer voices persist in measures 1-9 and 47-51. Next, materials freely mix, gradually interpolating to a brief, yet stable, material statement in measures 10-19 and 52-64. The same formal move is repeated more rapidly where materials mix then are interpolated to a stable statement in measures 20-25 and 65-70. An extended passage of rapid material exchange provides a heightened state of tension and instability in measures 26-40 and 71-85. The closing sections of each half of the piece are distinct, but both feature unified material changes across the whole ensemble in a quasi-cadential statement of arrival in measures 41-46 and 86-90. My findings are somewhat supported by Morate's description of the section boundaries. Morate claims the sections are 1-17, 17-41, 41-51, 52-62, 63-85, and 86-90.\footnote{\citet[285-286]{guerreropaper}} I have drawn these divisions in my graph as vertical black lines.
+
+Morate lists the sequence of materials as: \{AB, BC, C, CDE, EC, BEC, BECF, BCE, EGC, GCAE, AE, EGC, E, EA, EGC, EA, EAD, D, DA, DBA, AD, A, AB, ABE, BG, BDEG, EADB, ECG, D\}.\footnote{\citet[285-286]{guerreropaper}} I have labeled these materials under the graph. Morate claims these units are derived from combinations of size 1-4 on the total set of seven materials\footnote{Identical to the technique described earlier in this chapter related to combinations of sets of three materials.}. I also see a rough progression related to elisions of the sets of Steiner triples. Morate's sections are divided as seen in figure \ref{fig:rhea-form}, and I have included in parentheses my interpretation of the contents of these sections as an almost linear progression through Guerrero's solution to the Steiner triple system. Underlined material labels in my annotations represent materials which are missing from the section if the Steiner triple is indeed implied.
+
+\begin{figure}[H]
+\small
+1\textsuperscript{st} section:A, B, BC (\colorbox{yellow}{ABC})
+
+2\textsuperscript{nd} section: \textcolor{printBlue}{C}, \textcolor{printBlue}{C}DE, \textcolor{printBlue}{C}E, B\textcolor{printBlue}{C}E, B\textcolor{printBlue}{C}EF, B\textcolor{printBlue}{C}E (\colorbox{yellow}{BDE} and \colorbox{yellow}{DCF})
+
+3\textsuperscript{rd} section: CE\textcolor{printBlue}{G}, ACE\textcolor{printBlue}{G}, [AE], CE\textcolor{printBlue}{G}, [E, AE], CE\textcolor{printBlue}{G}, AE (\colorbox{yellow}{CEG} and \colorbox{yellow}{EA\underline{F}})
+
+4\textsuperscript{th} section: A\textcolor{printBlue}{D}E, \textcolor{printBlue}{D}, A\textcolor{printBlue}{D}, AB\textcolor{printBlue}{D}, A\textcolor{printBlue}{D} (re-exposition of previously-heard material)
+
+5\textsuperscript{th} section: [A], A\textcolor{printBlue}{B}, A\textcolor{printBlue}{B}E, \textcolor{printBlue}{B}G, \textcolor{printBlue}{B}DEG, A\textcolor{printBlue}{B}DE (\colorbox{yellow}{\underline{F}GB} and \colorbox{yellow}{GAD})
+
+Coda: CEG, D (re-exposition of previously-heard material)
+\normalsize
+    \caption{Division of materials into sections according to Morate with commentary}
+    \label{fig:rhea-form}
+\end{figure}
+
+Morate's labels show each subsection featuring common elements with every adjacent subsection and within each section; except for section 1 and the coda, every subgroup shares a specific common element which softens the perception of material change in a section.\footnote{\citet[285-286]{guerreropaper}} There are also a few brief insertions, notated by brackets, which do not feature the primary common element within the section. In section two, every subgroup features material \boxed{\text{C}}; in section three every subgroup features material \boxed{\text{G}}; in section four every subgroup features material \boxed{\text{D}}; and in section five every subgroup features material \boxed{\text{B}}.
+
+\section{Concurrent vs. Fused Materials}
+
+Sometimes materials are played simultaneously in different voices, but on certain occasions qualities of more than one material are present at once. Starting in measure 20, materials \boxed{\text{C}} and \boxed{\text{E}} are combined so that the performer must sing in to the instrument while playing repeated staccato notes. Measure 26 introduces the combination of singing with multiphonics, a fusion of \boxed{\text{B}} and \boxed{\text{C}}, with a continuation of the \boxed{\text{C}}/\boxed{\text{E}} combination. Measure 41 features singing and trill in a combination of \boxed{\text{C}} and \boxed{\text{G}}. The ascending figures at 44 could be considered a fusion of \boxed{\text{A}} and \boxed{\text{E}}. In Guerrero's œuvre, frullato is typically freely mixed into any material, but when interpreted as a proxy for material \boxed{\text{E}}, a combination of \boxed{\text{E}} and \boxed{\text{G}} appears in 46. The other instances of fused materials are \boxed{\text{E}}/\boxed{\text{C}} and \boxed{\text{A}}/\boxed{\text{E}} at 50, \boxed{\text{D}}/\boxed{\text{E}} at 77, and \boxed{\text{E}}/\boxed{\text{C}}/\boxed{\text{G}} at 86. These are noted at the bottom of the graph in brackets where combined materials are notated in the form X+Y.
+
+\section{Conclusion and Personal Application}
+
+Guerrero is clearly deeply interested in finding a totally generalized approach to composition, which is why his concept of musical material is often not specific to a given instrumental context. With the exception of his use of multiphonics, which can be found in several works, and a few techniques for bowed string instruments like pizzicato and sul ponticello, Guerrero makes no use of instrument-specific techniques. While I have no source supporting the following claim, it is my assumption that this follows as a result of the desire to generalize compositional processes. I have found this same situation in my own work. If a material is hyper-specific to a certain instrument or orchestrational context, it can be difficult and even ambiguous to find a solution for consistently applying the qualities of one instrumental technique to other instrumental groups over the course of a piece. If, for instance, material \boxed{\text{A}} refers to scratch tone on bowed strings, what would this technique look like on a wind instrument or a piano? Perhaps an analogous sound could be produced by the winds, but it would be unlikely for Guerrero to find a solution for the piano. As a result we find a lack of instrument-specific techniques in his work, and when such techniques are present, they typically are in the context of an instrumentally homogeneous ensemble, like 12 saxophones or string orchestra.
+
+For personal application to my own composition, I find special appreciation for Guerrero's use of recurrence and his deployment of material-statement density as a method for the generation of tension and uniform material changes across the ensemble as a type of release of that tension. The sense of recurrence found in \textit{Rhea} is only possible if a musical material is so well-defined that it is recognizable and distinct from other surrounding musical events. In my own work I think form could be complexified away from large blocks into smaller concurrent strands (i.e. variegation). I think my music stands slightly outside of the fauve æsthetic;\footnote{However, I suspect fauvism will gradually encroach upon my work with time.} therefore, I want more timbrally nuanced musical material, which invites some ambiguity in the definition of ``material'' as mentioned above. I also want to be able to define musical materials unique to each piece rather than generalizing a texture to be applied to every subsequent piece. I was encouraged that my preexisting interest in material formalization could be meaningfully and successfully applied to large-scale formal maneuvers, and this can be seen in my third string quartet, \textit{Polillas}.
+
+Guerrero's definition of musical materials involves the coupling of melodic, rhythmic, and sometimes instrument-specific techniques. While these materials can be partitioned into event groups, these materials are essentially static textures and no development occurs between events. Guerrero is also difficult to include under the concept of Rational Thaumaturgy. While he clearly acknowledges artistic choice and does not aim for total material unification, his rhetoric occasionally veers into the scientistic:
+\begin{quote}
+    \singlespacing
+    ``I have always liked mathematics, and I have always thought that music should use it. Already at the age of 15, more or less, I tormented my science university friends with my requests and questions. No one knew what to tell me (I didn't know what to ask either). In Sonda magazine I discovered an article about Xenakis with a lot of mathematics, and the light came. His mathematics did not interest me, but his spirit did. I owe him my orientation, and my vital adjustment. The purity of mathematics, clean, noble and untainted?''\footnote{\citet[174]{guerrero-quote}}
+\end{quote}
+
+And even the slightly dogmatic and chauvinistic:
+
+\begin{quote}
+\singlespacing
+``I am not interested in minimalism, integral serialism, spectralism, neos of any kind, etc... I am not interested in anything that does not look forward and everything mentioned looks either backward or towards the wall, as if punished. I hate the laziness of people, their lack of commitment to what they do, the lack of dignity of many composers (are they?), the pedantry (now, many of the people who laughed at my mathematics have turned to fractals. Do you really know what that is?), the vanity of the clumsy and the envy of those who are even more so.''\footnote{\citet[173]{guerrero-quote}}
+\end{quote}
+
+I share no such prejudice. Nevertheless his acknowledgement of artistic choice (See the epigraph of chapter \vref{Chapter4}) makes him a near miss for inclusion in the Rational Thaumaturgy category.
+

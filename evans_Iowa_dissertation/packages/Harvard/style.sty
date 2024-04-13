@@ -1,0 +1,181 @@
+\ProvidesPackage{packages/Harvard/style}
+
+% School name and location
+\university{University of Iowa}
+\universitycity{Iowa City}
+\universitystate{Iowa}
+
+% School color found from university's graphic identity site:
+% http://isites.harvard.edu/icb/icb.do?keyword=k75408&pageid=icb.page392732
+\definecolor{SchoolColor}{rgb}{1, 0.8, 0} % Yellow
+\definecolor{chaptergrey}{rgb}{1, 0.8, 0} % for chapter numbers
+
+\definecolor{printGrey}{rgb}{0.734, 0.737, 0.737}
+\definecolor{printBlue}{rgb}{0, 0.66, 0.88}
+\definecolor{printGreen}{rgb}{0, 0.69, 0.4}
+\definecolor{printOrange}{rgb}{1, 0.5, 0}
+
+\definecolor{digitalGrey}{rgb}{0.388, 0.4, 0.415}
+\definecolor{digitalBlue}{rgb}{0, 0.333, 0.549}
+\definecolor{digitalGreen}{rgb}{0, 0.4, 0.309}
+\definecolor{digitalOrange}{rgb}{0.741, 0.278, 0.1647}
+
+\hypersetup{
+    colorlinks,
+    citecolor=printBlue,
+    filecolor=black,
+    linkcolor=black,
+    urlcolor=printGreen,
+}
+
+% Formatting guidelines found in:
+% http://www.gsas.harvard.edu/publications/form_of_the_phd_dissertation.php
+\renewcommand{\frontmatter}{
+	\input{frontmatter/personalize}
+	\maketitle
+	\copyrightpage
+	\abstractpage
+	\tableofcontents
+	% \listoffigures % optional
+	\dedicationpage
+	\acknowledgments
+}
+
+\renewcommand{\maketitle}{
+	\thispagestyle{empty}
+	\vspace*{\fill}
+	\vspace{75pt}
+	\begin{center}
+	\Huge \textcolor{SchoolColor}{\@title} \normalsize \\
+	\vspace{75pt}
+	\textsc{a dissertation presented \\ by\\
+	\theauthor\\ to\\ The Department of \@department\\
+	\vspace{12pt}
+	in partial fulfillment of the requirements\\
+	for the degree of\\ \@degree\\
+	in the subject of\\ \@field\\
+	\vspace{12pt}
+	\@university\\ \@universitycity, \@universitystate\\
+	\@degreemonth\ \@degreeyear}
+        % MY ADDITION
+        \\
+        \vspace{24pt}
+        {\smallcaps{COMMITTEE} }
+        \\
+        \begin{tabular}{ l l }
+        David K Gompper, Thesis Supervisor & Jean-François Charles \\
+         Sarah Suhadolnik & Joshua Albrecht
+         % Advisor: David K Gompper, Professor & Jean-François Charles, Assoc Professor \\
+         % Sarah Suhadolnik, Asst Professor of Instruction & Joshua Albrecht, Asst Professor
+        \end{tabular}
+	\end{center} \vspace*{\fill}
+}
+
+\newcommand{\copyrightpage}{
+	\newpage
+	\thispagestyle{empty}
+	\vspace*{\fill}
+	\scshape \noindent \small \copyright \small 2024\hspace{3pt}-- \theauthor \\
+	\noindent all rights reserved.
+        \\
+        \begin{center}
+        \includegraphics[width=0.45\textwidth]{figures/1982-baca-nasturtium-edit.png}
+        \\
+        \emph{Nasturtium}
+        \\
+        Trevor Bača
+        \\
+        \emph{Personal Materials}
+        \\
+        (c.1982)
+        \end{center}
+	\vspace*{\fill}
+	\newpage
+	\rm
+ \newpage
+	\thispagestyle{empty}
+	\vspace*{\fill}
+}
+
+\newcommand{\scholarlyabstractpage}{
+	\newpage
+	% \pagenumbering{roman}
+	% \setcounter{page}{4}
+	\pagestyle{fancy}
+	% \lhead{Dissertation advisor: Professor \@advisor} \rhead{\@author}
+	\renewcommand{\headrulewidth}{0.0pt}
+	% \vspace*{35pt}
+	\begin{center}
+	% \Large \textcolor{SchoolColor}{\@title} \normalsize \\
+	% \vspace*{20pt}
+	\scshape Abstract \\ \rm
+	\end{center}
+	\input{frontmatter/scholarly-abstract}
+	\vspace*{\fill}
+	\newpage \lhead{} \rhead{}
+	\cfoot{\thepage}
+}
+
+\newcommand{\publicabstractpage}{
+	\newpage
+	% \pagenumbering{roman}
+	% \setcounter{page}{3}
+	\pagestyle{fancy}
+	% \lhead{Dissertation advisor: Professor \@advisor} \rhead{\@author}
+	\renewcommand{\headrulewidth}{0.0pt}
+	% \vspace*{35pt}
+	\begin{center}
+	% \Large \textcolor{SchoolColor}{\@title} \normalsize \\
+	% \vspace*{20pt}
+	\scshape Public Abstract \\ \rm
+	\end{center}
+	\input{frontmatter/abstract}
+	\vspace*{\fill}
+	\newpage \lhead{} \rhead{}
+	\cfoot{\thepage}
+        \newpage
+	\thispagestyle{empty}
+	\vspace*{\fill}
+        \singlespacing
+}
+
+\newcommand{\dedicationpage}{
+\pagenumbering{roman}
+        \setcounter{page}{1}
+	\newpage
+ % \thispagestyle{fancy}
+ \vspace*{\fill}
+	\scshape \noindent \input{frontmatter/dedication}
+	\vspace*{\fill} \newpage \rm
+}
+
+\newcommand{\frontispiece}{
+% \pagenumbering{roman}
+	\newpage
+    % \thispagestyle{fancy}
+    \vspace*{\fill}
+% \noindent
+% \hspace*{-\oddsidemargin}%
+\centerline{\noindent}%
+\makebox[\textwidth]{\includegraphics[width=\columnwidth]{frontmatter/Tovenaarsleerling_S_Barth.png}}
+\vspace*{\fill} \newpage \rm
+}
+
+\newcommand{\acknowledgments}{
+        % \pagenumbering{roman}
+	\chapter*{Acknowledgments}
+	% \noindent
+	\input{frontmatter/thanks}
+	\vspace*{\fill} \newpage
+	% \setcounter{page}{1}
+	% \pagenumbering{arabic}
+}
+
+% graffito
+% \def\graffito@setup{%
+% %   \slshape\footnotesize% this was due to \slhape in above book
+%    \itshape\footnotesize\leavevmode\color{Black}%
+%    \parindent=0pt \lineskip=0pt \lineskiplimit=0pt %
+%    \tolerance=2000 \hyphenpenalty=300 \exhyphenpenalty=300%
+%    \doublehyphendemerits=100000%
+%    \finalhyphendemerits=\doublehyphendemerits}

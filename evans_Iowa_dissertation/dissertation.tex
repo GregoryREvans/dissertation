@@ -1,0 +1,177 @@
+%!TEX TS-program = xelatex 
+%!TEX encoding = UTF-8 Unicode
+
+% Modify the following line to match your school
+% Available options include `Harvard`, `Princeton`, and `NYU`.
+\documentclass[
+    School=Harvard,
+    % margin=1in,
+    twoside,
+    openright,
+    BCOR10mm,
+]{Dissertate}% only use twoside and openright when printing!
+
+\newcommand\FanoPlane[1][1cm]{%
+\begin{tikzpicture}[
+mydot/.style={
+  draw,
+  circle,
+  fill=black,
+  inner sep=1.5pt}
+]
+\draw[thick]
+  (0,0) coordinate (A) --
+  (#1,0) coordinate (B) --
+  ($ (A)!.5!(B) ! {sin(60)*2} ! 90:(B) $) coordinate (C) -- cycle;
+\coordinate (O) at
+  (barycentric cs:A=1,B=1,C=1);
+\draw[thick,red] (O) circle [radius=#1*1.717/6];
+\draw[thick,printBlue] (C) -- ($ (A)!.5!(B) $) coordinate (LC); 
+\draw[thick,violet] (A) -- ($ (B)!.5!(C) $) coordinate (LA); 
+\draw[thick,SchoolColor] (B) -- ($ (C)!.5!(A) $) coordinate (LB); 
+% \foreach \Nodo in {A,B,C,O,LC,LA,LB}
+%   \node[mydot] at (\Nodo) {};    
+  \node[circle,inner sep=0.4pt,draw=black,fill=white,minimum size=0.15cm](smallRect) at (A) {C};
+  \node[circle,inner sep=0.4pt,draw=black,fill=white,minimum size=0.15cm](smallRect) at (B) {E};
+  \node[circle,inner sep=0.4pt,draw=black,fill=white,minimum size=0.15cm](smallRect) at (C) {A};
+  \node[circle,inner sep=0.4pt,draw=black,fill=white,minimum size=0.15cm](smallRect) at (O) {D};
+  \node[circle,inner sep=0.4pt,draw=black,fill=white,minimum size=0.15cm](smallRect) at (LC) {G};
+  \node[circle,inner sep=0.4pt,draw=black,fill=white,minimum size=0.15cm](smallRect) at (LA) {F};
+  \node[circle,inner sep=0.4pt,draw=black,fill=white,minimum size=0.15cm](smallRect) at (LB) {B};
+\end{tikzpicture}%
+}
+
+\begin{document}
+\newfontfamily\hindifont{Noto Sans Devanagari}[Script=Devanagari]
+% the front matter
+\input{frontmatter/personalize}
+\maketitle
+\copyrightpage
+\justifying
+\dedicationpage
+\frontispiece
+\acknowledgments
+\title{Rational Thaumaturgy: Formal Variegation and the Formalization of Event Groups in the Music of Jean Barraqué, Francisco Guerrero Marín, Trevor Bača, and Gregory Rowland Evans} % redefine title for prettier abstract page
+\scholarlyabstractpage
+\publicabstractpage
+\tableofcontents
+%\authorlist
+\cleardoublepage
+\phantomsection
+\addcontentsline{toc}{chapter}{List of Tables}
+\listoftables
+\cleardoublepage
+\phantomsection
+\addcontentsline{toc}{chapter}{List of Figures}
+\listoffigures
+% list of symbols?
+\cleardoublepage
+\phantomsection
+\addcontentsline{toc}{chapter}{Listings}
+\lstlistoflistings
+%*******************************************************
+% Symbols
+%*******************************************************
+%\phantomsection
+\pdfbookmark[1]{List of Symbols}{symbols}
+\markboth{\uppercase{List of Symbols}}{\uppercase{List of Symbols}}
+\chapter*{List of Symbols}
+\addcontentsline{toc}{chapter}{List of Symbols}
+\begin{tabular}{cp{0.6\textwidth}}
+    $!$ & factorial \\
+    $\subset$ & is a proper subset of \\
+    $\in$ & is member of \\
+    $\not\subset$ & is not a proper subset of \\
+    $\%$ & modulo, or remainder \\
+    ϕ & phi, or $\frac{1 + \sqrt{5}}{2}\approx$ 1.61803...\\
+    π & pi, or $\frac{circumference}{diameter}\approx$ 3.14159... \\
+    $\cap$ & set intersection \\
+    $\cup$ & set union \\
+    $\Sigma$ & sum \\
+\end{tabular}\\
+
+%*******************************************************
+
+%*******************************************************
+% Acronyms
+%*******************************************************
+%\phantomsection
+\pdfbookmark[1]{Acronyms}{acronyms}
+\markboth{\uppercase{Acronyms}}{\uppercase{Acronyms}}
+\chapter*{Acronyms}
+\addcontentsline{toc}{chapter}{Acronyms}
+\begin{acronym}[UMLX]
+    \acro{ANG}{automatic notation generator}
+    \acro{API}{application programming interface}
+    \acro{CLT}{col legno tratto}
+    \acro{CSD}{composition as software development}
+    \acro{FSC}{formalized score control}
+    \acro{GUI}{graphic user interface}
+    \acro{LIFO}{last in first out}
+    \acro{LILO}{last in last out}
+    \acro{MIDI}{musical instrument digital interface}
+    \acro{OB}{on the bridge}
+    \acro{PDF}{portable document format}
+    \acro{SB}{slow bow}
+    \acro{SP}{sul ponticello}
+    \acro{ST}{sul tasto}
+    \acro{XFB}{extremely fast bow}
+    \acro{XSB}{extremely slow bow}
+    \acro{XSP}{extremely sul ponticello}
+    \acro{XST}{extremely sul tasto}
+\end{acronym}
+%*******************************************************
+
+\doublespacing
+
+% \cleardoublepage % doesn't work ...
+% include each chapter...
+\setcounter{chapter}{-1}  % start chapter numbering at 0
+% \justifying
+\include{chapters/introduction}
+
+\mypartone{Analysis}
+\include{chapters/barraque}
+\include{chapters/chapter1}
+\include{chapters/chapter2}
+\myparttwo{Synthesis}
+\include{chapters/chapter3}
+\include{chapters/chapter4}
+\include{chapters/conclusion}
+\appendixpart{Appendices}
+\begin{appendices}
+    \renewcommand{\thechapter}{\setmainfont{EB Garamond}\textbf{\Greeklowalpha{chapter}}}
+    \include{chapters/appendixA}
+    \include{chapters/appendixB}
+    \include{chapters/appendixC}
+    \include{chapters/appendixD}
+    \include{chapters/appendixE}
+    \include{chapters/appendixF}
+    \include{chapters/appendixG}
+    \include{chapters/appendixH}
+\end{appendices}
+
+\singlespacing
+
+% the back matter
+\clearpage
+% \bibliography{references}
+% \addcontentsline{toc}{chapter}{Bibliography}
+% \bibliographystyle{apalike2}
+\printbibliography[
+heading=bibintoc,
+title={Bibliography}
+]
+% \include{endmatter/index}
+% \cleardoublepage
+% \printindex
+\newpage
+\thispagestyle{empty}
+\vspace*{\fill}
+\lhead{} \rhead{}
+\renewcommand{\headrulewidth}{0.0pt}
+\fancyhead[CE]{} 
+\fancyhead[CO]{}
+\include{endmatter/colophon}
+
+\end{document}

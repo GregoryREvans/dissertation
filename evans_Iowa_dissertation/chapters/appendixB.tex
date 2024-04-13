@@ -1,0 +1,754 @@
+\chapter{Abjad Basics}
+\label{AppendixB}
+
+\lettrine[lines=2,slope=-2pt,nindent=2pt]{\textcolor{SchoolColor}{I}}{n order to assist} in the undertanding of some of the references to Trevor Ba\v{c}a's composing environment, the Abjad \ac{API} for \ac{FSC}, I have undertaken, here, to outline the basics of this composing system. This will not be a comprehensive guide on how to compose music with Abjad nor will I explain the best practices for designing Python programs. This guide will only supply enough knowledge to be able to engage with some of the necessary discussions of the use of Abjad in the music at hand. For lengthier discussions on the subject, the reader is encouraged to read my paper \textit{An Introduction to Modeling Music Composition with Abjad's Model of Music Notation}\footnote{\url{https://github.com/GregoryREvans/thesis/blob/master/An_Introduction_to_Modeling_Composition_through_Abjad's_Model_of_Music_Notation.pdf}} or Joséphine Wolf Oberholtzer's dissertation \textit{A Computational Model of Music Composition}.\footnote{\url{https://github.com/josephine-wolf-oberholtzer/dissertation/blob/master/dissertation.pdf}}\marginpar{Both of these papers are, assuredly, sorely out of date, but they should be enlightening nonetheless.}
+
+\section{Python}
+
+Python is a general purpose programming language created by Guido van Rossum. First it will be important to describe the notation used in the code examples. The examples will simulate a terminal\footnote{Not all operating systems have the same kind of access to a terminal (or command line, or command prompt). Since the main users of Abjad all use Mac laptops of one form or another, I will use the term `terminal' as this is the name of the built-in program on Mac computers. It provides a UNIX environment.} window, even if a larger function is being defined. In this notation,\footnote{But notably not in actual practice.} all lines of code which are theoretically input into the terminal session are preceded by a sequence of three chevrons and a space. In the Python programming language, white space often has significance. If a line input at the terminal is `tabbed' in any amount, it will be preceded by a sequence of three dots and a space. When a final value is returned from the code, it is written underneath the terminal input, preceded by no characters. For example \autoref{lst:terminalnotation}:
+\begin{lstlisting}[frame=tb,caption={Terminal notation},label=lst:terminalnotation]
+>>> variable = value
+>>> function(variable)
+result
+\end{lstlisting}
+
+\subsection{Built-in types}
+
+To familiarize ourselves with some of the most basic aspects of Python, we will begin with built-in data types and some built-in functions. A `string' is a sequence of characters. This is identifiable by the use of quotation marks.\footnote{The quotes can be single, double, triple, etc. so long as the number of quotation marks is equal on both sides.} We can define variables which will hold our data with sequences of characters without quotation marks with a single `=' sign. A built-in function which is commonly used for de-bugging code is the `print()' statement. This function will display the input value to the terminal window. In the following example, a variable, called `x', is assigned the value of a string of characters spelling `string'. The print function is called on the variable `x' which displays the value `string' to the terminal window. See \autoref{lst:pythonprinting}.
+
+\begin{lstlisting}[language=Python,frame=tb,caption={Printing a string to the terminal window},label=lst:pythonprinting]
+>>> x = ``string''
+>>> print(x)
+string
+\end{lstlisting}
+
+There are a variety of numeric types in Python: the \textit{integer}, the \textit{float}, the \textit{decimal}, and the \textit{fraction}. These types represent exactly what is suspected by their names with the difference between floating-point decimal types and decimal types being their precision due to the manner in which the data is stored. Mathematical operations may be calculated with them. See \autoref{lst:mathexample}.
+
+\begin{lstlisting}[language=Python,frame=tb,caption={Performing mathematical operations},label=lst:mathexample]
+>>> print(2 + 3)
+5
+\end{lstlisting}
+
+Also within Python are \textit{iterable} types which contain multiple values within them such as the \textit{tuple}, the \textit{list}, the \textit{set}, and the \textit{dictionary}. The role of these types is to carry larger quantities of information and have unique features. The tuple (named after the suffix in duple, triple, quadruple, quin\textit{tuple}, sex\textit{tuple}, ...) takes the form of a \textit{single} item which happens to be comprised of multiple sub-items. Just as it is illogical that a number may be rewritten to another value\footnote{Note that it is possible to rewrite the value stored within a variable, however a number is atomic and cannot `become' another number.} neither may a tuple be revised after initialization. It is immutable. A list is very much like a tuple except for it's ability to have select indices replaced, it's ability to be extended by another iterable type, and by it's ability to have more values appended. It is mutable. A sorting algorithm may be applied as well if desired. See \autoref{lst:listexample}. A set is like a list where no duplicate values appear and certain logical set-operations may be performed on it.\footnote{i.e. union, intersection, etc.} Finally, a dictionary is much like a list where values are retrieved by a \textit{key} of any immutable type chosen when the value is stored within the dictionary. See \autoref{lst:dictionaryexample}.
+
+\begin{lstlisting}[frame=tb,caption={Example of list notation},label=lst:listexample]
+>>> example_list = [0, 1, 2, ``three'', 4.0]
+>>> example_list[3]
+three
+>>> example_list[1:]
+[1, 2, ``three'', 4.0]
+>>> example_list[0] = 12
+>>> print(example_list)
+[12, 1, 2, ``three'', 4.0]
+>>> new_list = [11, 10, 9]
+>>> example_list.extend(new_list)
+>>> print(example_list)
+[12, 1, 2, ``three'', 4.0, 11, 10, 9]
+>>> example_list.append(new_list)
+>>> print(new_list)
+[12, 1, 2, ``three'', 4.0, 11, 10, 9, [11, 10, 9]]
+>>> sorted([12, 4, 6, 5, 11, 10, 1, 2, 7, 3, 0, 9, 8])
+[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
+\end{lstlisting}
+
+\begin{lstlisting}[frame=tb,caption={Example of dictionary notation},label=lst:dictionaryexample]
+>>> example_dictionary = {
+...     ``key 1'': 22,
+...     ``key 2'': [0, 1, 2],
+...     ``key 3'': (``one'', ``two'', ``three''),
+... }
+>>> example_dictionary[``key 2'']
+[0, 1, 2]
+\end{lstlisting}
+
+\subsection{Conditions}
+
+Python has the ability to test values for certain conditions and return a boolean value. Boolean values are data structures known as \textit{True} or \textit{False}. These values could be passed around a program with binary 0 or 1 values, however it is useful to disambiguate boolean values from integers in case the user accidentally passes data incorrectly. The Python operator \textit{is} tests for the identity of an object. It returns True if the two objects have the same location in the computer's memory. A common mistake for beginning programmers is to assume that the \textit{is} operator is the same as the \textit{==} operator. This is not the case. \textit{==} tests for the equivalence of two values. \textit{<, >, <=, >=,} and \textit{!=} coincide with the expressions ``less than,'' ``greater than,'' ``less than or equal to,'' ``greater than or equal to,'' and ``does not equal.'' For instance, the expression $True == 1$ evaluates to True, however $True\: is\: 1$ evaluates to False. The \textit{in} operator tests of a given value is contained by a particular instance of an iterable. Boolean values can be inverted with the use of \textit{not}. The expression \textit{not True} evaluates to False and \textit{not False} evaluates to True. This can be useful for harmonizing code with the programmer's internal logic, nevertheless most tests can be written without the \textit{not} operator.
+
+\subsection{Iteration and Conditional Statements}
+
+Iteration is the process of repeating a block of code multiple times until a certain condition is met. A \textit{while} loop should be written such that the block of code inside the loop, performs some operation on the value being tested. As a result, the performing of the operation \textbf{causes} the condition to be met.
+
+\begin{lstlisting}[language=Python,frame=tb,caption={A simple while loop},label=lst:while]
+>>> x = 0
+>>> while x < 5:
+...     print(x)
+...     x = x + 1
+... 
+0
+1
+2
+3
+4
+\end{lstlisting}
+
+The other kind of loop is the \textit{for} loop. This iterator is initiated by defining a dummy variable to refer to each item in a sequence, or other iterable class, then the code block within the loop operates with the value of each item in the sequence one-by-one.
+
+\begin{lstlisting}[language=Python,frame=tb,caption={A simple for loop},label=lst:for]
+>>> x = [0, 1, 2, 3, 4]
+>>> for my_variable in x:
+...     print(my_variable)
+... 
+0
+1
+2
+3
+4
+\end{lstlisting}
+
+A loop can be comprised of several blocks of code which are activated only under certain conditions. These blocks are summoned by the use of \textit{if, elif,} and \textit{else.}
+
+\begin{lstlisting}[language=Python,frame=tb,caption={A simple for loop with conditional blocks},label=lst:for-conditional]
+>>> x = [0, 1, 2, 3, 4]
+>>> for my_variable in x:
+...     print(my_variable)
+...     if my_variable < 1:
+...         print("The value above is < 1")
+...     elif my_variable % 2 == 0:
+...         print("The value above is EVEN")
+...     else:
+...         print("The value above is neither <1 nor even")
+... 
+0
+The value above is < 1
+1
+The value above is neither <1 nor even
+2
+The value above is EVEN
+3
+The value above is neither <1 nor even
+4
+The value above is EVEN
+\end{lstlisting}
+
+When iterating over a sequence-like object, it is also possible to use Python's built-in \textit{enumerate} function to pass both each item of the sequence and its index in the sequence into the loop.
+
+\begin{lstlisting}[language=Python,frame=tb,caption={Enumeration},label=lst:enumerate]
+>>> x = ["a", "b", "c", "d", "e"]
+>>> for i, my_variable in enumerate(x):
+...     print(f"{i}:{my_variable}")
+... 
+0:a
+1:b
+2:c
+3:d
+4:e
+\end{lstlisting}
+
+\subsection{Functions and Classes}
+
+Functions are user-defined processes which can either operate in-place on an input value or return a new result of its own. 
+
+\begin{quote}
+\singlespacing
+``In simple terms, a \textit{function} is a device that groups a set of statements so they can be run more than once in a program—a packaged procedure invoked by name. [...] More fundamentally, functions are the alternative to programming by \textit{cutting and pasting}—rather than having multiple redundant copies of an operation's code, we can factor it into a single function.''\footnote{\citet[491]{pythonbook}}
+\end{quote}
+
+Functions are defined with \textit{def} seen in \autoref{lst:def}.
+
+\begin{lstlisting}[language=Python,frame=tb,caption={Defining a basic function},label=lst:def]
+>>> def my_function(value_1, value_2):
+...     new_value = value_1 + value_2
+...     return new_value
+...
+>>> new_value = my_function(2, 3)
+>>> print(new_value)
+5
+\end{lstlisting}
+
+\subsubsection{Recursion}
+
+Occasionally, it will be necessary to write a function which calls \textbf{itself} within its own body. Recursion can be used in situations where it is not the obvious first solution as a means of speed optimization, however the most obvious situation in which one ought to recurse is when input data may or may not be arbitrarily nested. In these cases, the function is written to take input of any nesting depth and performs the operations of the body of the function at all levels.
+
+\begin{lstlisting}[language=Python,frame=tb,caption={An example of recursion},label=lst:recursion]
+>>> def recursively_reverse(l):
+...     out = []
+...     for value in l:
+...         if isinstance(value, list):
+...             reversed_sub_list = recursively_reverse(value)
+...             out = [reversed_sub_list] + out
+...         else:
+...             out = [value] + out
+...     return out
+...
+>>> l = [0, 1, 2, [3, 4, 5], 6, 7, [8, [9, 10], 11], 12, 13]
+>>> print(recursively_reverse(l))
+[13, 12, [11, [10, 9], 8], 7, 6, [5, 4, 3], 2, 1, 0]
+\end{lstlisting}
+
+User-defined data types called objects or \textit{classes} are available. While a traditional explanation of the uses of classes incorporates the ability to inherit attributes from one class to the next, an important realization about the necessity of a class is whether or not the structure is intended to be statal, that is: whether or not information stored within the class will be necessary to be queried after a value has been updated. Classes may carry attributes, values like the types described above, or methods, functions which operate on the data stored in the class or on external data when called to do so. A very basic class could be defined as follows in \autoref{lst:class}.
+
+\begin{lstlisting}[language=Python,frame=tb,caption={Defining a basic class},label=lst:class]
+>>> class ExampleObject:
+...     def __init__(self, attribute):
+...         self.attribute = attribute
+...
+...     def sum_attribute_with_input(self, input):
+...         returned_value = attribute + input
+...         return returned_value
+...
+\end{lstlisting}
+
+\subsection{Modules, Libraries, Packages, and Programs}
+
+As a software project develops and gradually expands, it is inevitable that the programmer will expand from working on a handful of isolated, single-file projects to larger projects of multiple interconnected files. Sometimes these software ecosystems can become quite large. A distinction can be made between software projects comprised of tools which are meant to be imported into other projects or to be used by other developers once installed into a development environment and projects which are designed to produce some end-result, be that the deployment of a web-based project, a series of graphs and tables referring to a dataset, or the pdf document of a musical score.\footnote{As is the case of Abjad projects.}
+
+In projects of the first category, subunits can be distinguished by the terms \textit{module}, \textit{library}, and \textit{package}. A \textit{module} is a common namespace comprised of functions, classes or other tools. A set of modules grouped together by their logical relationships and potentially their interdependence is called a \textit{library}. Libraries can be imported into programs and other libraries. A \textit{package} is a method for distributing code to a community of users. Packages can contain libraries, programs, and other relevant files. \autoref{fig:akasha-directory-layout} shows the organization of the top-level directory of Trevor Ba\v{c}a's composition \textit{Akasha}. Libraries need not be the only component comprising a package. Projects which are primarily designed to run as a program may contain a library specific to the program. This distinguishes the code from the rest of the package for clarity and for ease in maintenance.
+\\
+\begin{figure}[!ht]
+\vspace{-0.5\baselineskip}
+\noindent%
+\dirtree{%
+.1  akasha/.
+    .2  .github/\DTcomment{
+        The score package test suite.
+        }.
+        .3  workflows/\DTcomment{
+            Wrapping folder
+            }.
+            .4  main.yml\DTcomment{
+                The actual file containing test routines.
+                }.
+    .2 akasha/.
+        .3  builds/\DTcomment{
+            LilyPond and LaTeX files for building document targets.
+            }.
+        .3  distribution/\DTcomment{
+            Finished PDFs for performers and conductors.
+            }.
+        .3  etc/\DTcomment{
+            Notes, to-do lists and plans.
+            }.
+        .3  sections/\DTcomment{
+            Configured sections and their illustrations.
+            }.
+            .4  01/\DTcomment{
+                Files for section programs and their illustrations.
+                }.
+                .5 header.ily.
+                .5 layout.ly.
+                .5 layout.py.
+                .5 music.ily\DTcomment{
+                    Lilypond results of score configuration.
+                    }.
+                .5 music.ly.
+                .5 music.py\DTcomment{
+                    Definition of musical contents of section.
+                    }.
+            .4  02/.
+            .4  03/.
+            .4  04/.
+            .4  05/.
+            .4  06/.
+            .4  07/.
+            .4  08/.
+            .4  09/.
+            .4  10/.
+            .4  11/.
+            .4  12/.
+            .4  13/.
+            .4  14/.
+            .4  15/.
+            .4  stylesheet.ily\DTcomment{
+                Extra stylsesheet for cleaner layout in isolated sections.
+                }.
+        .3  \_\_init\_\_.py\DTcomment{
+            The score package Python initializer.
+            }.
+        .3  library.py.\DTcomment{
+            Library of necessary functions and classes specific to this score only.
+            }.
+        .3  stylesheet.ily\DTcomment{
+            LilyPond stylesheet.
+            }.
+    .2 README.md.
+    .2 setup.py.\DTcomment{
+        Setup file for installation of the score package.
+        }.
+}
+\caption{A summary of \emph{Akasha}'s directory layout}
+\label{fig:akasha-directory-layout}
+\end{figure}
+
+\begin{quote}
+\singlespacing
+``[...] a program is considered to be a series of precoded statements stored in a file for repeated execution. Module files that are run directly are also sometimes called scripts—an informal term usually meaning a top-level program file. Some reserve the term `module' for a file imported from another file, and `script' for the main file of a program [...]''\footnote{\citet[55]{pythonbook}}
+\end{quote}
+
+\section{Lilypond}
+
+Lilypond is a music notation engraving software created by Han-Wen Nienhuys and Jan Nieuwenhuizen. Lilypond is used by writing text files of syntactically appropriate commands to be parsed by the Lilypond engraving engine which then produces an image file, often a \ac{PDF}, of the music notation represented within the text file. The design of the Lilypond language is meant to be similar to \TeX which is a document typesetter created by Donald E. Knuth. Lilypond is highly configurable by settings, overrides, tweaks, and code written in the Scheme programming language\footnote{Scheme, created by Guy L. Steele and Gerald Jay Sussman at MIT, is a version of the LISP programming language.} most of which can be stored externally from the music commands in a stylesheet.\footnote{The concept of a stylesheet should be familiar to anyone with experience in web design with CSS.} Since Lilypond files are written as text files, any programming language with the ability to write characters to files may be employed to programmatically produce such files. \autoref{lst:lilypond} shows a very basic Lilypond file.
+
+\begin{lstlisting}[frame=tb,caption={A simple Lilypond file},label=lst:lilypond]
+\version ``2.19.83''
+\language ``english''
+
+\score {
+    \context Score = ``Score''
+    <<
+        \context Staff = ``Staff''
+        {
+            \time 4/4
+            c'4
+            cs'4
+            d'4
+            ef'4
+            \time 3/4
+            f'4
+            fs'4
+            g'4
+            \time 5/4
+            af'4
+            a'4
+            bf'4
+            b'4
+            c''4
+        }
+    >>
+}
+\end{lstlisting}
+
+It is possible to use Abjad as a compositional tool without a complete knowledge of Lilypond, however this is not recommended. Abjad models, in many respects, aspects of Lilypond's syntactical choices. For instance, notes and rests are used as the anchoring points of articulations, spanning lines such as dynamic hairpins, trill, and text spanners, as well as isolated markup text. Because of this Abjad models the concept of ``attachment,'' where anchor nodes must be selected and assigned the role of host to any of these various elements. It will also become necessary to modify aspects of document layout through system overrides either directly through Abjad, resuting in modifiers within the generated Lilypond file, or through a standalone stylesheet.
+
+\section{Abjad}
+
+Abjad is a library of Python classes and functions meant to object-model the atoms of music notation to be manipulated by the composer with all the tools of computer programming in order to produce Lilypond files to be rendered as \acp{PDF} to be interpreted by instrumental performers in concert. The method by which composers develop works with Abjad is through the initialization of instances of Python objects which represent elements of music notation, then concatenating sequences of these objects into the nested, tree-like structure representing the musical score. This score structure is then converted into a Lilypond text file which is ultimately compiled into a \ac{PDF} of music notation by the Lilypond program.
+
+\subsection{Leaves and Logical Ties}
+
+The basic units of score control are the leaves of the tree structure, that is the notes and rests. These objects have a duration attribute which the composer can configure with an assignable duration.\footnote{See chapter \ref{Chapter2} for a definition of assignability.} Note objects have an additional pitch attribute. Notes can also be collected into logical ties, which are not true containers as seen below, rather logical ties are created internally when an Tie object is attached to a Note object followed by another Note. Logical ties are incredibly important for certain kinds of compositional logic where it is necessary not to select, query, or modify individual note heads, but instead to deal with entire sounding events. These objects can be seen formatted to lilypond strings in listing \ref{lst:obj-eval}.
+
+\begin{lstlisting}[language=Python,frame=tb,caption={Object evaluation as Lilypond strings},label=lst:obj-eval]
+>>> import abjad
+>>> note = abjad.Note("as'", (3, 4))
+>>> print(abjad.lilypond(note))
+as'2.
+>>> rest = abjad.Rest((1, 4))
+>>> print(abjad.lilypond(rest))
+r4
+\end{lstlisting}
+
+\subsection{Containers and Contexts}
+
+A variety of container classes, model streams of musical data, such as the voice, staff, staff group, and score. A voice contains notes, a staff can contain multiple voices, a staff group can contain multiples staves, and a score can contain multiple staff groups.
+
+\begin{lstlisting}[language=Python,frame=tb,caption={Abjad containers},label=lst:containers]
+>>> import abjad
+>>> voice = abjad.Voice("cs'4 ~ cs'16")
+>>> print(abjad.lilypond(voice))
+\new Voice
+{
+    cs'4
+    ~
+    cs'16
+}
+\end{lstlisting}
+
+\subsection{abjad.attach()}
+
+Since the objects such as articulations, markup, and text spanners must be anchored to leaves within the score, Abjad models the process of assigning these objects to their anchors as attachment.
+
+\begin{lstlisting}[language=Python,frame=tb,caption={Abjad attachments},label=lst:attachments]
+>>> import abjad
+>>> voice = abjad.Voice("cs'4 cs'16")
+>>> relevant_leaf = abjad.select.leaf(voice, 0)
+>>> abjad.attach(abjad.Articulation("staccato"), relevant_leaf)
+>>> print(abjad.lilypond(voice))
+\new Voice
+{
+    cs'4
+    - \staccato
+    cs'16
+}
+\end{lstlisting}
+
+\subsubsection{Tweaks and Overrides}
+
+Lilypond also models graphic alteration of the basic symbols through overrides and tweaks. These modifications can alter spacing, shape, color, visibility, and other aspects of the symbolic notational elements.
+
+\begin{lstlisting}[language=Python,frame=tb,caption={Abjad tweaks},label=lst:tweaks]
+>>> import abjad
+>>> voice = abjad.Voice("cs'4 cs'16")
+>>> relevant_leaf = abjad.select.leaf(voice, 0)
+>>> bundle = abjad.bundle(
+...     abjad.Articulation("staccato"),
+...     abjad.Tweak(r"\tweak color #blue"),
+... )
+... 
+>>> abjad.attach(bundle, relevant_leaf)
+>>> print(abjad.lilypond(voice))
+\new Voice
+{
+    cs'4
+    \tweak color #blue
+    - \staccato
+    cs'16
+}
+\end{lstlisting}
+
+
+\subsection{Selections}
+
+Abjad also comes packaged with a library of powerful selection tools which allow the composer to easily filter the contents of a given context. For instance, one could select all non-tied note heads in a staff, all chords, all rests, and more. These selections can also be filtered in many ways, perhaps by selecting all notes excluding those with certain pitches or durations, or with an arbitrary user-input predicate. These selections can also be re-partitioned in a number of ways. A powerful built-in partition is that of the \textit{run}. Runs are sequences of pitched leaves delimited by rests. Selecting by runs returns a sequence with sub-sequences of pitched leaves which are guaranteed to be contiguous.
+
+\subsection{Rhythm Makers}
+\label{rmakers}
+Part of Ba\v{c}a's composition practice is the modeling of several of the ways composers have historically conceptualized the construction of the rhythmic surface of a piece. This modeling resulted in the development of the ``rhythm makers.'' Ba\v{c}a is uninterested in creating quantized durations from geometrically derived floating-point values.\footnote{Aside from the rhythm makers, there are other methods for rhythm generation within the Abjad ecosystem. There is a floating-point quantizer written by Joséphine Wolf Oberholtzer based on Paul Nauert's Q-Grids, an interface similar to the rhythm tree syntax from IRCAM's OpenMusic, and a LeafMaker class which uses durations representing single note values.} The rhythm makers, then, present an alternative. Joséphine Wolf Oberholtzer, in his paper \textit{A Computational Model of Music Notation}, describes the rhythm makers in the following way.
+
+\begin{quote}
+\singlespacing
+``Abjad’s rhythm makers [...] are highly-configurable [functions], taking as input sequences of divisions -- positive, non-reduced fraction tokens\footnote{Rather than coercing input into sequences of Duration objects, which reduce their denominators as much as possible, rhythm makers treat all input as non-reduced fractions, allowing them to disambiguate {\addfontfeature{Fractions=On}4/16} from {\addfontfeature{Fractions=On}2/8} or {\addfontfeature{Fractions=On}6/8} from {\addfontfeature{Fractions=On}3/4} and to therefore treat those division tokens as distinct.} representing the divisions in some phrase of music -- and producing selections of score components as output. Abjad’s [rmakers] library contains a variety of such classes, each providing a different strategy for rhythm generation, but unified by the same callable interface. Additionally, [rmakers] provides a collection of specifier classes which group related configuration values together for controlling the behavior of ties, beams, duration spelling and other notational aspects of each rhythm maker’s output.''\footnote{\citet[p.118]{josiahpaper}}
+\end{quote}
+
+The rhythm makers provide an interface for creating characteristic rhythmic units and are designed to be able to populate the score for any total duration. They are typically used to define \textit{types} of rhythmic characters which may contrast with one another and proceed in simultaneity. Described below, the rhythm makers library consists of a stack which models a sequence of compositional actions, the rhythm makers proper which model the actual rhythm generation, and finally commands and specifiers which model a variety of techniques to selectively modify and beautify the final result.
+
+\subsubsection{The Makers}
+
+Several different makers are defined: the accelerando rhythm maker, the even-division rhythm maker, the incised rhythm maker, the multiplied-duration rhythm maker, the note rhythm maker, the talea rhythm maker, and the tuplet rhythm maker. The output of each rhythm maker is markedly different because, as may be observed by their names, they each model a different rhythmic process. What follows is a brief tour of some of the possible configurations of each rhythm maker. Note that, while these examples show the rhythmic divisions as coinciding with measure boundaries, the rhythm makers may be called on a list of any durations, possibly decoupled from the sizes of notated measures.
+
+\subsubsection{Accelerando Rhythm Maker}
+The accelerando rhythm maker produces a sequence of leaves with durations composed as a cosine interpolation between a starting duration and a concluding duration either as an accelerando or a rallantando. The interpolation is calculated with the values of the start duration, the stop duration, and μ representing how much of the total duration has been filled. With these values a new μ is calculated by taking one half of 1 minus $μ * π$. The final returned value of the function is calculated as the sum of start duration $* (1 - μ)$ and the stop duration $* μ$.
+
+To fill a duration with attacks, the value of that \textit{total duration} must be stored as well as a \textit{partial sum} representing how much of the total duration has been filled as the function loops. The function loops until the total duration is filled and the cosine interpolation function is used to calculate the duration of each note where μ is calculated as the value of how much of the target duration has already been filled divded by the target duration.
+
+The process can be formalized in the following way. Let \( D = [d_1, d_2, \ldots, d_n] \) be the list of durations calculated by the function, where \( n \) is the number of iterations required to exceed the total duration. We can represent the accumulation of durations until the total is exceeded as:
+
+\begin{equation}
+\text{T} < \sum_{i=1}^{n} d_i
+\end{equation}
+
+Where $T$ is the total desired duration and each \( d_i \) is the duration at the \( i \)th iteration, given by:
+
+\begin{equation}
+d_i = \text{t} \cdot \left(1 - \frac{1 - \cos\left(\frac{\sum_{j=1}^{i-1} d_j}{T} \cdot \pi\right)}{2}\right) + \text{p} \cdot \frac{1 - \cos\left(\frac{\sum_{j=1}^{i-1} d_j}{T} \cdot \pi\right)}{2}
+\end{equation}
+
+Where $t$ is the start value of the interpolated durations and $p$ is the stop value of the durations. This representation highlights the summation of individual durations \( d_i \) until the total duration condition is met.
+
+\autoref{fig:accelerando} shows the rhythm maker implementation of this process in action with eighth notes interpolating to 20\textsuperscript{th} notes for the full duration of each measure, notated as 16\textsuperscript{th} notes.
+
+% \begin{lstlisting}[language=Python,frame=tb,caption={A Stack with accelerando},label=lst:accelerandostack]
+% >>> stack = rmakers.stack(
+% ...     rmakers.accelerando([(1, 8), (1, 20), (1, 16)]),
+% ...     rmakers.feather_beam(),
+% ...     rmakers.duration_bracket(),
+% ... )
+% >>> divisions = [(4, 8), (3, 8), (4, 8), (3, 8)]
+% >>> selection = stack(divisions)
+% >>> lilypond_file = abjad.LilyPondFile.rhythm(selection, divisions)
+% >>> abjad.illustrators.attach_markup_struts(lilypond_file)
+% >>> abjad.show(lilypond_file)
+% \end{lstlisting}
+
+\begin{figure}[H]
+    \includegraphics{lilypond/accelerando/example.pdf}
+    \caption{Interpolation from $\frac{1}{8}$ to $\frac{1}{20}$}
+    \label{fig:accelerando}
+\end{figure}
+
+\autoref{fig:ritardando} reverses the interpolation. It shows a starting duration of $\frac{1}{20}$, ends with $\frac{1}{8}$, and writes the durations as $\frac{1}{32}$.\footnote{The written duration of the notes produced by this rhythm maker only modify the number of flags or beams. The cosine interpolation between the start and stop durations is what controls the actual spacing.}
+
+% \begin{lstlisting}[language=Python,frame=tb,caption={A Stack with ritardando},label=lst:ritardandostack]
+% >>> stack = rmakers.stack(
+% ...     rmakers.accelerando([(1, 20), (1, 8), (1, 32)]),
+% ...     rmakers.feather_beam(),
+% ...     rmakers.duration_bracket(),
+% ... )
+% >>> divisions = [(4, 8), (3, 8), (4, 8), (3, 8)]
+% >>> selection = stack(divisions)
+% >>> lilypond_file = abjad.LilyPondFile.rhythm(selection, divisions)
+% >>> abjad.illustrators.attach_markup_struts(lilypond_file)
+% >>> abjad.show(lilypond_file)
+% \end{lstlisting}
+
+\begin{figure}[H]
+    \includegraphics{lilypond/ritardando/example.pdf}
+    \caption{Interpolation from $\frac{1}{20}$ to $\frac{1}{8}$}
+    \label{fig:ritardando}
+\end{figure}
+
+\subsubsection{Even-division Rhythm Maker}
+
+The even-division rhythm maker produces a sequence of equidistant durations. Even-division rhythm makers produce rhythms by dividing the input divisions into runs of notes of equal duration. The user provides a sequence of duration denominators for each division and the rhythm maker attempts to fill each division with notes of the duration $\frac{1}{denominator}$. In the case that the division cannot be filled exactly by a run of these durations, a tuplet will be used to produce rhythms as close to the desired written duration as possible. Another feature is triggered if the duration of a division is less than 2 times the desired note duration, the division will be completely filled by a single attack. The even-division rhythm maker may be configured with an \textit{extra\_counts} keyword as a list of integers. These integers are used to add a number of attacks equivalent to the integer to the notes produced for a given division. These divisions are then formatted as tuplets, preserving the total timed duration of the division. \autoref{fig:evendivision} shows an even-division rhythm maker configured to produce notes with the written duration of $\frac{1}{8}$ with the final division containing an extra attack.
+
+% \begin{lstlisting}[language=Python,frame=tb,caption={A Stack with even division},label=lst:evendivisionstack]
+% >>> stack = rmakers.stack(
+% ...     rmakers.even_division([8], extra_counts=[0, 0, 1]),
+% ...     rmakers.force_diminution(),
+% ...     rmakers.beam(),
+% ...     rmakers.extract_trivial(),
+% ... )
+% >>> divisions = [(5, 16), (6, 16), (6, 16)]
+% >>> selection = stack(divisions)
+% >>> lilypond_file = abjad.LilyPondFile.rhythm(selection, divisions)
+% >>> abjad.illustrators.attach_markup_struts(lilypond_file)
+% >>> abjad.show(lilypond_file)
+% \end{lstlisting}
+
+\begin{figure}[H]
+    \includegraphics{lilypond/even_division/example.pdf}
+    \caption{Even divisions of $\frac{1}{8}$ with an extra count pattern of [0, 0, 1]}
+    \label{fig:evendivision}
+\end{figure}
+
+\subsubsection{Note Rhythm Maker}
+
+The note rhythm maker produces a single rhythmic event of the duration of each input division. This produces attacks even if the duration is not assignable. Assignability refers to the fact that Western notation allows for the easy notation of notes, rests, and chords with durations like $\frac{1}{4}$ and $\frac{3}{16}$, but notating with durations like $\frac{1}{3}$ can only be done with recourse to tuplets or ties.
+
+% \begin{lstlisting}[language=Python,frame=tb,caption={A Stack with note},label=lst:notestack]
+% >>> stack = rmakers.stack(
+% ...     rmakers.note(),
+% ... )
+% >>> divisions = [(4, 8), (3, 8), (4, 8), (3, 8), (2, 8)]
+% >>> selection = stack(divisions)
+% >>> lilypond_file = abjad.LilyPondFile.rhythm(selection, divisions)
+% >>> abjad.illustrators.attach_markup_struts(lilypond_file)
+% >>> abjad.show(lilypond_file)
+% \end{lstlisting}
+
+\begin{figure}[H]
+    \includegraphics{lilypond/note/example.pdf}
+    \caption{Notes of assignable measure duration}
+    \label{fig:note}
+\end{figure}
+
+The difference between durations like $\frac{1}{4}$ and $\frac{1}{5}$ is formalized in the concept of assignability. A duration $\frac{n}{d}$ is assignable when the numerator \textit{n} is of the form $2^i - 2^j$ while $j < i$ and the denominator \textit{d} is of the form $2^v$. \textit{i} must be a positive integer, and \textit{j} and \textit{v} must be nonnegative integers. Assignability is important because it explains why the written duration of any note, rest or chord can be set to $\frac{1}{4}$ or $\frac{7}{4}$ but never to $\frac{1}{5}$ or $\frac{7}{5}$. The note rhythm maker then can produce durations like $\frac{1}{6}$ which requires a tuplet and durations like $\frac{5}{8}$ which requires a tie.
+
+% \begin{lstlisting}[language=Python,frame=tb,caption={A Stack with note},label=lst:unusualnotestack]
+% >>> stack = rmakers.stack(
+% ...     rmakers.note(),
+% ... )
+% >>> divisions = [(1, 7), (1, 6), (1, 5), (1, 4), (1, 3), (1, 2), (5, 8)]
+% >>> selection = stack(divisions)
+% >>> lilypond_file=abjad.LilyPondFile.rhythm(selection,divisions)
+% >>> abjad.illustrators.attach_markup_struts(lilypond_file)
+% >>> abjad.show(lilypond_file)
+% \end{lstlisting}
+
+\begin{figure}[H]
+    \includegraphics{lilypond/note_2/example.pdf}
+    \caption{Notes with some unassignable durations}
+    \label{fig:unusualnote}
+\end{figure}
+
+\subsubsection{Talea Rhythm Maker}
+
+The isorhythmic structure of the talea is an ancient technique of polyphonic texture. Typically a talea is present in a voice holding more of an accompaniment role and in the case of Machaut's Kyrie from the Messe de Nostra Dame, a talea voice presents the color of the kyrie cantus firmus. The talea rhythm maker cyclically produces durations from a list of numerators which combine with a static denominator. This rhythm maker's state-handling will produce ties across division boundaries when necessary to complete any unfinished duration.
+
+% \begin{lstlisting}[language=Python,frame=tb,caption={A Stack with talea},label=lst:taleastack]
+% >>> stack = rmakers.stack(
+% ...     rmakers.talea([1, 2, 3, 4], 16),
+% ...     rmakers.beam(),
+% ...     rmakers.extract_trivial(),
+% ... )
+% >>> divisions = [(3, 8), (4, 8), (3, 8), (4, 8)]
+% >>> selection = stack(divisions)
+% >>> lilypond_file = abjad.LilyPondFile.rhythm(selection, divisions)
+% >>> abjad.illustrators.attach_markup_struts(lilypond_file)
+% >>> abjad.show(lilypond_file)
+% \end{lstlisting}
+
+\begin{figure}[H]
+    \includegraphics{lilypond/talea/example.pdf}
+    \caption{A talea of $\frac{1}{16}$, $\frac{2}{16}$, $\frac{3}{16}$, $\frac{4}{16}$}
+    \label{fig:talea}
+\end{figure}
+
+Just like the even-division rhythm maker, the talea rhythm maker can be configured with an \textit{extra\_counts} keyword. This allows each division to contain a greater written duration than the division's true, timed duration.
+
+% \begin{lstlisting}[language=Python,frame=tb,caption={A Stack with talea and extra counts},label=lst:taleastackextracounts]
+% >>> stack = rmakers.stack(
+% ...     rmakers.talea([1, 2, 3, 4], 16, extra_counts=[0, 1, 0, 2]),
+% ...     rmakers.beam(),
+% ... )
+% >>> divisions = [(3, 8), (4, 8), (3, 8), (4, 8)]
+% >>> selection = stack(divisions)
+% >>> lilypond_file = abjad.LilyPondFile.rhythm(selection, divisions)
+% >>> abjad.illustrators.attach_markup_struts(lilypond_file)
+% >>> abjad.show(lilypond_file)
+% \end{lstlisting}
+
+\begin{figure}[H]
+    \includegraphics{lilypond/talea_extra_counts/example.pdf}
+    \caption{A talea of $\frac{1}{16}$, $\frac{2}{16}$, $\frac{3}{16}$, $\frac{4}{16}$ and an extra count pattern of [0, 1, 0, 2] for each division}
+    \label{fig:taleaextracounts}
+\end{figure}
+
+Additionally, the talea rhythm maker may be given a preamble and end counts which are placed at the beginning and end of the run of divisions on which the rhythm makers are called. Rests may be incorporated directly into the talea by use of negative integers.
+
+% \begin{lstlisting}[language=Python,frame=tb,caption={A Stack with talea, preamble, and end counts},label=lst:taleastackpreamble]
+% >>> stack = rmakers.stack(
+% ...     rmakers.talea([2, -2], 16, preamble=[1, 1], end_counts=[1, 1, 1]),
+% ...     rmakers.beam(),
+% ...     rmakers.extract_trivial(),
+% ... )
+% >>> divisions = [(3, 8), (4, 8), (3, 8), (4, 8)]
+% >>> selection = stack(divisions)
+% >>> lilypond_file = abjad.LilyPondFile.rhythm(selection, divisions)
+% >>> abjad.illustrators.attach_markup_struts(lilypond_file)
+% >>> abjad.show(lilypond_file)
+% \end{lstlisting}
+
+\begin{figure}[H]
+    \includegraphics{lilypond/talea_preamble/example.pdf}
+    \caption{A talea of $\frac{2}{16}$, $\frac{-2}{16}$, with a preamble of $\frac{1}{16}$, $\frac{1}{16}$ and end counts of $\frac{1}{16}$, $\frac{1}{16}$, and $\frac{1}{16}$}
+    \label{fig:taleapreamble}
+\end{figure}
+
+\subsubsection{Tuplet Rhythm Maker}
+
+The tuplet rhythm maker produces rhythms calculated as partitions of the duration on which it is called. Like the talea rhythm maker, rests can be incorporated into the partitions by use of negative integers.
+
+% \begin{lstlisting}[language=Python,frame=tb,caption={A Stack with tuplet},label=lst:tupletstack]
+% >>> stack = rmakers.stack(
+% ...     rmakers.tuplet([(3, 2)]),
+% ...     rmakers.beam(),
+% ... )
+% >>> divisions = [(1, 2), (3, 8), (5, 16), (5, 16)]
+% >>> selection = stack(divisions)
+% >>> lilypond_file = abjad.LilyPondFile.rhythm(selection, divisions)
+% >>> abjad.illustrators.attach_markup_struts(lilypond_file)
+% >>> abjad.show(lilypond_file)
+% \end{lstlisting}
+
+\begin{figure}[H]
+    \includegraphics{lilypond/tuplet/example.pdf}
+    \caption{Tuplets partitioning measures by the proportion (3, 2)}
+    \label{fig:tupletstackresult}
+\end{figure}
+
+\subsubsection{The Commands}
+
+The rhythm makers also provide commands as an interface for selectively modifying and beautifying the rhythmic output, separate from the innate functionality of any rhythm maker. These operations may occur no matter which maker is producing the skeletal rhythmic structure. These commands allow for the adding of grace notes, beaming, forcing units to be rests or sustains, fusing rests and ties in rest-filled or sustained divisions, and tying together multiple attacks to name a few features.
+
+The force rest command turns notes into rests and its opposite, the force note command, turns rests into notes.
+
+% \begin{lstlisting}[language=Python,frame=tb,caption={Force rest and note commands},label=lst:forcerest]
+% >>> import abjad
+% >>> from abjadext import rmakers
+% >>> stack = rmakers.stack(
+% ...     rmakers.note(),
+% ...     rmakers.force_rest(lambda _: abjad.select(_).leaves()),
+% ...     rmakers.force_note(lambda _: abjad.select(_).logical_ties()[1:3]),
+% ... )
+% >>> divisions = [(7, 16), (3, 8), (7, 16), (3, 8)]
+% >>> selections = stack(divisions)
+% >>> lilypond_file = abjad.LilyPondFile.rhythm(selections, divisions)
+% >>> abjad.illustrators.attach_markup_struts(lilypond_file)
+% >>> abjad.show(lilypond_file)
+% \end{lstlisting}
+
+\begin{figure}[H]
+    \includegraphics{lilypond/force_rest/example.pdf}
+    \caption{Selectively forced rests}
+    \label{fig:forcerest}
+\end{figure}
+
+The tie command attaches a tie to each selected leaf.
+
+% \begin{lstlisting}[language=Python,frame=tb,caption={Tie command},label=lst:tie]
+% >>> def selector(argument):
+% ...     result = abjad.select(argument).tuplets()[:-1]
+% ...     return [abjad.select(_).leaf(-1) for _ in result]
+% ...
+% >>> stack = rmakers.stack(
+% ...     rmakers.talea([5, 3, 3, 3], 16),
+% ...     rmakers.tie(selector),
+% ...     rmakers.beam(),
+% ...     rmakers.extract_trivial(),
+% ... )
+% >>> divisions = [(4, 8), (3, 8), (4, 8), (3, 8)]
+% >>> selection = stack(divisions)
+% >>> lilypond_file = abjad.LilyPondFile.rhythm(selection, divisions)
+% >>> abjad.illustrators.attach_markup_struts(lilypond_file)
+% >>> abjad.show(lilypond_file)
+% \end{lstlisting}
+
+\begin{figure}[H]
+    \includegraphics{lilypond/tie_command/example.pdf}
+    \caption{A talea of $\frac{5}{16}$, $\frac{3}{16}$, $\frac{3}{16}$, $\frac{3}{16}$, with a tie attached to the final leaf of each division}
+    \label{fig:tie}
+\end{figure}
+
+The grace container command assists with the attachment of grace notes to notes within the output divisions.
+
+% \begin{lstlisting}[language=Python,frame=tb,caption={Grace container command},label=lst:grace]
+% >>> stack = rmakers.stack(
+% ...     rmakers.note(),
+% ...     rmakers.GraceContainerCommand(
+% ...         counts=[2, 3],
+% ...         talea=rmakers.Talea([1], 16),
+% ...         selector=abjad.select().leaves().get([1, 3])
+% ...     ),
+% ... )
+% >>> divisions = [(4, 8), (3, 8), (4, 8), (3, 8)]
+% >>> selection = stack(divisions)
+% >>> lilypond_file = abjad.LilyPondFile.rhythm(selection, divisions)
+% >>> abjad.illustrators.attach_markup_struts(lilypond_file)
+% >>> abjad.show(lilypond_file)
+% \end{lstlisting}
+
+\begin{figure}[H]
+    \includegraphics{lilypond/grace_command/example.pdf}
+    \caption{Selective attachment of grace notes}
+    \label{fig:grace}
+\end{figure}
+
+\subsection{Alternative Rhythm Making}
+
+In addition to the processes described above, Trevor Ba\v{c}a sometimes makes recourse to alternative methods of rhythm creation. While other systems for rhythm creation exist in the Abjad ecosystem, Ba\v{c}a has a simple solution for alternative rhythm specification. When necessary, Ba\v{c}a can input rhythm information directly as durations, bypassing the formalization process.
+
+\subsection{abjad.sequence}
+
+Bača's primary way of manipulating sequences of numbers or other elements is through the sequence sub-library found in Abjad. It manipulates sequences of data, through the implementation of many possible combinations of processes.
+
+\subsubsection{Flatten}
+
+If a sequence of data comes in the form of a nested list but needs to be input as an un-nested list, the \textit{flatten} function is used.
+
+\begin{lstlisting}[language=Python,frame=tb,caption={A flattened sequence},label=lst:flatten]
+>>> s = abjad.sequence.flatten([1, [2, 3, [4]], 5, [6, 7, [8]]])
+[1, 2, 3, [4], 5, 6, 7, [8]]
+\end{lstlisting}
+
+The nestedness of a sequence can be removed layer by layer, which can be specified with the \textit{depth} keyword. It is often necessary to completely un-nest a sequence and this can be done by setting \textit{depth=-1}.
+
+\begin{lstlisting}[language=Python,frame=tb,caption={A flattened sequence at depth=-1},label=lst:fully-flatten]
+>>> s = abjad.sequence.flatten([1, [2, 3, [4]], 5, [6, 7, [8]]], depth=-1)
+[1, 2, 3, 4, 5, 6, 7, 8]
+\end{lstlisting}
+
+\subsubsection{Remove Repeats}
+
+If a sequence of data has undesired immediate repetitions, these can be removed.
+
+\begin{lstlisting}[language=Python,frame=tb,caption={A sequence with removed repetitions},label=lst:repeat-removal]
+>>> abjad.sequence.remove_repeats([31, 31, 35, 35, 31, 31, 31, 31, 35])
+[31, 35, 31, 35]
+\end{lstlisting}
+
+\subsubsection{Reverse}
+
+Sequences can also be reversed.
+
+\begin{lstlisting}[language=Python,frame=tb,caption={A reversed sequence},label=lst:reverse]
+>>> abjad.sequence.reverse([[1, 2], 3, [4, 5]])
+[[4, 5], 3, [1, 2]]
+\end{lstlisting}
+
+The reversal can also be performed resursively on nested sequences.
+
+\begin{lstlisting}[language=Python,frame=tb,caption={A recursively reversed sequence},label=lst:reverse-recurse]
+>>> abjad.sequence.reverse([[1, 2], 3, [4, 5]], recurse=True)
+[[5, 4], 3, [2, 1]]
+\end{lstlisting}
+
+There are more operations implemented in Abjad, and even more within Bača's subclass of the Sequence sub-library within his own personal \ac{API}.
+
+\subsubsection{h-rotation}
+\label{helianthus}
+Among the functions relevant to \textit{Akasha} is \textit{helianthation.} Helianthation, alternately known as h-rotation, is a technique Bača introduced in 1998 as part of Trevor Ba\v{c}a's undergraduate thesis composition.\footnote{However, it was officially formalized in a paper from 2010. See: \vref{AppendixE}.} The word helianthus, derived from ἥλιος (helios, sun) and ἄνθος (anthos, flower), is the root of the technique's name. The sunflower turns to face the sun throughout the day and the seeds of the flower spiral from the center in a Fibonacci, or golden spiral, pattern: an outer and an inner rotation. Helianthation, then, is a nested rotation technique where an outer list of lists rotates while the inner lists also rotate. A typical configuration of the helianthation pattern are the rotation values (-1, 1). This is a specific manipulation technique common in Bača's early works. Because of its abstract nature, it can be used to organize many things like pitch sequencing, rhythm durations, material patterning, and more. There is a tendency for reversed rotations of inner and outer layers as well as a preference for monotonic increase or decrease of the integers within each sub-block. This allows for a sense of a set of linear progress to be gradually disordered.
+
+\section{Conclusion}
+
+With the combined use of Abjad's model of musical notation elements, built in functions,\footnote{i.e. transposition, leaf and tuplet making, sequence processing...} and user-defined functions and classes, the composer builds up the elements of a score piece-by-piece. Instead of initializing every single notational element, the composer write a software library of tools to efficiently create and manipulate a score, while allowing for the direct development of a formalized compositional framework to be applied to the elements of any given work.
